@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4CED5E4BB4B6AA1E38EC7096 /* Pods_NFT_Create.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E808F86B1E03D2F095FE97BD /* Pods_NFT_Create.framework */; };
+		BCD34D4527A0701400CFA2E7 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD34D4427A0701400CFA2E7 /* SaveViewController.swift */; };
 		BCE4689627A01B3C0005BD2B /* BackgroundUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4689527A01B3C0005BD2B /* BackgroundUIViewController.swift */; };
 		BCE4689827A01BBA0005BD2B /* BackgorundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4689727A01BBA0005BD2B /* BackgorundCollectionViewCell.swift */; };
 		BCED320C279E0274003DC98B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED320B279E0274003DC98B /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BCD34D4427A0701400CFA2E7 /* SaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveViewController.swift; sourceTree = "<group>"; };
 		BCE4689527A01B3C0005BD2B /* BackgroundUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundUIViewController.swift; sourceTree = "<group>"; };
 		BCE4689727A01BBA0005BD2B /* BackgorundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgorundCollectionViewCell.swift; sourceTree = "<group>"; };
 		BCED3208279E0274003DC98B /* NFT Create.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NFT Create.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +153,7 @@
 			children = (
 				BCED320F279E0274003DC98B /* HomeViewController.swift */,
 				BCE4689527A01B3C0005BD2B /* BackgroundUIViewController.swift */,
+				BCD34D4427A0701400CFA2E7 /* SaveViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				BCED323F279E1826003DC98B /* GetDataClass.swift in Sources */,
 				BCE4689827A01BBA0005BD2B /* BackgorundCollectionViewCell.swift in Sources */,
 				BCED320C279E0274003DC98B /* AppDelegate.swift in Sources */,
+				BCD34D4527A0701400CFA2E7 /* SaveViewController.swift in Sources */,
 				BCED323B279E16DD003DC98B /* DataModel.swift in Sources */,
 				BCED3216279E0274003DC98B /* NFT_Create.xcdatamodeld in Sources */,
 				BCED3235279E159F003DC98B /* SliderCollectionViewCell.swift in Sources */,

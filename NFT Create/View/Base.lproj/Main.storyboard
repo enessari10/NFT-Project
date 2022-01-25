@@ -343,7 +343,7 @@
                                 </constraints>
                                 <color key="tintColor" name="ButtonColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Open Gallery"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Choose Photo"/>
                                 <connections>
                                     <action selector="openGalleryButtonPressed:" destination="j7h-Bf-Ob3" eventType="touchUpInside" id="AXh-HB-TTa"/>
                                 </connections>
@@ -369,20 +369,29 @@
             </objects>
             <point key="canvasLocation" x="1605.7971014492755" y="85.714285714285708"/>
         </scene>
-        <!--View Controller-->
+        <!--Save View Controller-->
         <scene sceneID="spo-eV-ufg">
             <objects>
-                <viewController id="cSS-q7-sHw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SaveViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cSS-q7-sHw" customClass="SaveViewController" customModule="NFT_Create" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eww-C4-Elk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORr-U2-Zzm">
+                                <rect key="frame" x="20" y="61" width="374" height="275"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PPC-me-idM"/>
                         <color key="backgroundColor" name="MainColor"/>
                     </view>
+                    <connections>
+                        <outlet property="saveImageView" destination="ORr-U2-Zzm" id="9aN-5i-u6d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZL-ah-Iw8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2294" y="86"/>
+            <point key="canvasLocation" x="2292.753623188406" y="85.714285714285708"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YWW-xf-Pcs">

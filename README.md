@@ -1,2 +1,2 @@
-# NFT-Project
-Swift NFT Creator
+# NFT-Creator-Project
+Swift NFT Creator Project

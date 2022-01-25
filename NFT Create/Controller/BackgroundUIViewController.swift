@@ -38,7 +38,7 @@ class BackgroundUIViewController: UIViewController, UIImagePickerControllerDeleg
         let cameraPhoto = UIAlertAction(title: "Camera", style: .default, handler: { [self]
                 (alert: UIAlertAction) -> Void in
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera){
-
+//Resim düzenleme
                     imagPickUp.mediaTypes = ["public.image"]
                     self.imagPickUp.sourceType = UIImagePickerController.SourceType.camera;
                     self.present(self.imagPickUp, animated: true, completion: nil)

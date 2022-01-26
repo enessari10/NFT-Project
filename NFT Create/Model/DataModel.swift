@@ -10,6 +10,7 @@ import Foundation
 struct CategoriesModel{
     var categoryName : String
     var categoryImage : String
+    var categoryURL : String
 }
 
 struct ImagesModel{
@@ -22,5 +23,9 @@ struct SlidersModel{
 }
 
 struct BackgroundsModel{
+    var imageURL : String
+}
+
+struct CategoryImageModel{
     var imageURL : String
 }

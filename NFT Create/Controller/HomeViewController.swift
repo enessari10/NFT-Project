@@ -6,24 +6,51 @@
 //
 
 import UIKit
+import ZLImageEditor
 
 class HomeViewController: UIViewController {
     
     @IBOutlet var homeTableView: UITableView!
     var getData = GetDataClass()
-    
+    var resultImageEditModel: ZLEditImageModel?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.dataSource = self
         homeTableView.delegate = self
+
         
     }
+   
+  
     @IBAction func createButtonPressed(_ sender: UIButton) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "BackgroundUIViewController") as! BackgroundUIViewController
         resultViewController.title = "Backgrounds"
         self.navigationController?.pushViewController(resultViewController, animated: true)
+    }
+    func saveGallery(resImage:UIImage){
+        UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
+
+    }
+    @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action:UIAlertAction!) in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            present(ac, animated: false)
+            
+        }
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
    
@@ -44,9 +71,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         } else if indexPath.row == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "allCategoriesCell", for: indexPath) as? AllCategoryTableViewCell else { fatalError()}
+            cell.delegate = self
+            
             return cell
         } else if indexPath.row >= 2{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as? CategoryTableViewCell else { fatalError()}
+            cell.delegate = self
             return cell
         }
         return UITableViewCell()
@@ -58,7 +88,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 1{
             return 160
         }else if indexPath.row >= 2{
-            return 165
+            return 600
         }else{
             return 165
         }
@@ -66,3 +96,35 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+extension HomeViewController: ImagesCollectionCellDelegate{
+    func didSelectCell(atIndex: UIImage) {
+        print("GİRDİİ \(atIndex)")
+        ZLImageEditorConfiguration.default()
+            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+            .adjustTools([.brightness, .contrast, .saturation])
+        
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: atIndex, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+            self!.saveGallery(resImage: resImage)
+        }
+        
+    }
+    
+    
+}
+
+extension HomeViewController: SelectedCategoryImage{
+    
+    func didSelectGoToPage(categoryName: String, categoryURL: String) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "CategoryImagesViewController") as! CategoryImagesViewController
+        
+        resultViewController.title = categoryName
+        resultViewController.getURL = categoryURL
+        self.navigationController?.pushViewController(resultViewController, animated: true)
+    }
+    
+  
+    
+    
+}

@@ -1,5 +1,5 @@
 //
-//  SaveViewController.swift
+//  EditorViewController.swift
 //  NFT Create
 //
 //  Created by Enes on 25.01.2022.
@@ -7,14 +7,12 @@
 
 import UIKit
 
-class SaveViewController: UIViewController {
+class EditorViewController: UIViewController {
 
-    @IBOutlet var saveImageView: UIImageView!
-    var selectedImage = UIImage()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveImageView.image = selectedImage
+
+        // Do any additional setup after loading the view.
     }
     
 

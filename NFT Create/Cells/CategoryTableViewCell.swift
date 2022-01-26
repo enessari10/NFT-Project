@@ -8,13 +8,18 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import Kingfisher
 
+protocol ImagesCollectionCellDelegate {
+    func didSelectCell(atIndex:UIImage)
+}
 
 class CategoryTableViewCell: UITableViewCell {
-
+    
     @IBOutlet var categoryCollectionView: UICollectionView!
-    @IBOutlet var categoryNameLabel: UILabel!
     var getData = GetDataClass()
+    var selectImage = UIImage()
+    var delegate : ImagesCollectionCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,12 +31,12 @@ class CategoryTableViewCell: UITableViewCell {
             self.categoryCollectionView.reloadData()
         }
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
-
+    
 }
 
 extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -43,9 +48,16 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "allCategoryCollectionCell", for: indexPath) as? CategoryCollectionViewCell else {fatalError() }
         cell.categoryImage.kf.indicatorType = .activity
         cell.categoryImage.kf.setImage(with: URL(string: getData.ImagesArray[indexPath.row].imageURL), placeholder: nil, options: [.transition((.fade(0.7)))], progressBlock: nil)
-        categoryNameLabel?.text = getData.CategoryArray[indexPath.row].categoryName
+        cell.stateLabel.text = getData.ImagesArray[indexPath.row].imagePro
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
+            if case .success(let getImage) = response.result {
+                self.delegate?.didSelectCell(atIndex: getImage)
+
+            }
+        }
+    }
     
 }

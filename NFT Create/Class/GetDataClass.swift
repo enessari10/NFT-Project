@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import ZLImageEditor
 
 class GetDataClass{
     
@@ -17,6 +18,7 @@ class GetDataClass{
     var ImagesArray : [ImagesModel] = []
     var SliderArray : [SlidersModel] = []
     var BackgroundsArray : [BackgroundsModel] = []
+    var CategoriesAllImages : [CategoryImageModel] = []
     
     var apiService = APIService()
     var url = "https://enessari.com/nftcreator/NFTModel.json"
@@ -29,7 +31,7 @@ class GetDataClass{
             self.jsonData = json
             let data = json["Categories"]
             data.array?.forEach({(cate) in
-                let categoryDataModel = CategoriesModel(categoryName: cate["categoryName"].stringValue,categoryImage: cate["categoryImage"].stringValue)
+                let categoryDataModel = CategoriesModel(categoryName: cate["categoryName"].stringValue,categoryImage: cate["categoryImage"].stringValue, categoryURL: cate["categoryURL"].stringValue)
                 self.CategoryArray.append(categoryDataModel)
             })
         }
@@ -49,14 +51,14 @@ class GetDataClass{
     
     //Sliders arrayinde görsel url'ini data modeline göre oluşmuş arraya append ediyor
     func getSlidersData(){
-            self.apiService.getAllData(url: self.url) { json in
-                self.jsonData = json
-                let data = json["Sliders"]
-                data.array?.forEach({(cate) in
-                    let sliderDataModel = SlidersModel(imageURL: cate["imageURL"].stringValue)
-                    self.SliderArray.append(sliderDataModel)
-                })
-            }
+        self.apiService.getAllData(url: self.url) { json in
+            self.jsonData = json
+            let data = json["Sliders"]
+            data.array?.forEach({(cate) in
+                let sliderDataModel = SlidersModel(imageURL: cate["imageURL"].stringValue)
+                self.SliderArray.append(sliderDataModel)
+            })
+        }
     }
     
     //Sliders arrayinde görsel url'ini data modeline göre oluşmuş arraya append ediyor
@@ -71,7 +73,17 @@ class GetDataClass{
         }
     }
     
-    
+    func getCategoryAllImages(selectedURL : String){
+        self.apiService.getAllData(url: selectedURL) { json in
+            self.jsonData = json
+            let data = json["Images"]
+            data.array?.forEach({(cate) in
+                let imageAll = CategoryImageModel(imageURL: cate["imageUrl"].stringValue)
+                self.CategoriesAllImages.append(imageAll)
+            })
+        }
+        
+    }
     
     
 }

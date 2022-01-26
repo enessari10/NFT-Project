@@ -16,8 +16,7 @@ class BackgroundUIViewController: UIViewController {
     @IBOutlet var backgroundCollectionView: UICollectionView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-    let imagePicker = UIImagePickerController()
-    var imageV : UIImageView!
+    
     
     
     override func viewDidLoad() {
@@ -28,22 +27,46 @@ class BackgroundUIViewController: UIViewController {
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
             self.backgroundCollectionView.reloadData()
         }
-        imagePicker.delegate = self
-
+        
         
     }
     
     @IBAction func openGalleryButtonPressed(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
-            print("Button capture")
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc,animated: true)
+    }
+    
+    func showImageEditor(selectImage:UIImage){
+        ZLImageEditorConfiguration.default()
+            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+            .adjustTools([.brightness, .contrast, .saturation])
+        
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+            UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
             
-            imagePicker.sourceType = .savedPhotosAlbum
-            imagePicker.allowsEditing = false
             
-            present(imagePicker, animated: true, completion: nil)
         }
-        
-        
+    }
+    @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action:UIAlertAction!) in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            present(ac, animated: false)
+            
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
     
@@ -62,30 +85,40 @@ extension BackgroundUIViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let urlImage = getData.BackgroundsArray[indexPath.row].imageURL
+        
         AF.request(urlImage).responseImage { response in
             if case .success(let getImage) = response.result {
-                ZLImageEditorConfiguration.default()
-                    .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
-                    .adjustTools([.brightness, .contrast, .saturation])
-                ZLEditImageViewController.showEditImageVC(parentVC: self, image: getImage, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
-                    
-                }
+                self.showImageEditor(selectImage: getImage)
+                
             }
         }
     }
     
+}
+
+
+
+
+extension BackgroundUIViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+            picker.dismiss(animated: true) {
+                self.showImageEditor(selectImage: image)
+                
+            }
+        }else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            showImageEditor(selectImage: image)
+            picker.dismiss(animated: true, completion: nil)
+            
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
     
 }
 
-extension BackgroundUIViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
-            self.dismiss(animated: true, completion: { () -> Void in
 
-            })
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "SaveViewController") as! SaveViewController
-        resultViewController.title = "Save"
-        resultViewController.saveImageView.image = image
-        self.navigationController?.pushViewController(resultViewController, animated: true)
-        }
-}

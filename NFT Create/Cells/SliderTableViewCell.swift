@@ -25,7 +25,7 @@ class SliderTableViewCell: UITableViewCell {
         getData.getSlidersData()
         sliderCollectionView.delegate = self
         sliderCollectionView.dataSource = self
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { (Timer) in
             self.sliderCollectionView.reloadData()            
         }
         DispatchQueue.main.async {

@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let cache = ImageCache.default
         cache.memoryStorage.config.totalCostLimit = 1024 * 1024 * 10
-
         return true
     }
 

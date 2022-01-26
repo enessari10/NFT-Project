@@ -46,6 +46,27 @@ class BackgroundUIViewController: UIViewController {
         
         ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
             UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
+            var textField = UITextField()
+            let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+            alert.addTextField { alertTextField in
+                alertTextField.placeholder = "Project Name"
+                
+                //Copy alertTextField in local variable to use in current block of code
+                textField = alertTextField
+            }
+            
+            let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
+                let newAdd = UserProject(context: self!.getData.context)
+                newAdd.projectName = textField.text!
+                newAdd.date = self!.getData.currentDateTime
+                let imageAsNSData = resImage.jpegData(compressionQuality: 1)
+                newAdd.image = imageAsNSData
+                self!.getData.coreDataArray.append(newAdd)
+                self!.getData.saveContext()
+                self?.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(action)
+            self!.present(alert, animated: true, completion: nil)
             
             
         }
@@ -61,7 +82,6 @@ class BackgroundUIViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }))
             present(ac, animated: false)
-            
         }
     }
     
@@ -83,9 +103,7 @@ extension BackgroundUIViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let urlImage = getData.BackgroundsArray[indexPath.row].imageURL
-        
         AF.request(urlImage).responseImage { response in
             if case .success(let getImage) = response.result {
                 self.showImageEditor(selectImage: getImage)

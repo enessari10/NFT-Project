@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import ZLImageEditor
+import CoreData
 
 class GetDataClass{
     
@@ -19,7 +20,10 @@ class GetDataClass{
     var SliderArray : [SlidersModel] = []
     var BackgroundsArray : [BackgroundsModel] = []
     var CategoriesAllImages : [CategoryImageModel] = []
-    
+    var coreDataArray = [UserProject]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let currentDateTime = Date()
+
     var apiService = APIService()
     var url = "https://enessari.com/nftcreator/NFTModel.json"
     var jsonData = JSON()
@@ -29,6 +33,7 @@ class GetDataClass{
     func getCategoriesData(){
         self.apiService.getAllData(url: self.url) { json in
             self.jsonData = json
+            print(json)
             let data = json["Categories"]
             data.array?.forEach({(cate) in
                 let categoryDataModel = CategoriesModel(categoryName: cate["categoryName"].stringValue,categoryImage: cate["categoryImage"].stringValue, categoryURL: cate["categoryURL"].stringValue)
@@ -85,5 +90,14 @@ class GetDataClass{
         
     }
     
-    
+    func saveContext(){
+        
+        do{
+            try context.save()
+            
+        }catch{
+            print("Save Error")
+        }
+        
+    }
 }

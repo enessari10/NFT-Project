@@ -7,32 +7,63 @@
 
 import UIKit
 import ZLImageEditor
+import CoreData
 
 class HomeViewController: UIViewController {
     
     @IBOutlet var homeTableView: UITableView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.dataSource = self
         homeTableView.delegate = self
-
+        
         
     }
-   
-  
+    
+    
     @IBAction func createButtonPressed(_ sender: UIButton) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "BackgroundUIViewController") as! BackgroundUIViewController
         resultViewController.title = "Backgrounds"
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
+    @IBAction func projectButtonPressed(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+        resultViewController.title = "My Projects"
+        self.navigationController?.pushViewController(resultViewController, animated: true)
+    }
+    
+    
     func saveGallery(resImage:UIImage){
         UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
-
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+        alert.addTextField { alertTextField in
+            alertTextField.placeholder = "Project Name"
+            
+            //Copy alertTextField in local variable to use in current block of code
+            textField = alertTextField
+        }
+        
+        let action = UIAlertAction(title: "Add item", style: .default) { action in
+            let newAdd = UserProject(context: self.getData.context)
+            newAdd.projectName = textField.text!
+            newAdd.date = self.getData.currentDateTime
+            let imageAsNSData = resImage.jpegData(compressionQuality: 1)
+            newAdd.image = imageAsNSData
+            self.getData.coreDataArray.append(newAdd)
+            self.getData.saveContext()
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        
     }
     @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -48,12 +79,13 @@ class HomeViewController: UIViewController {
             
         }
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-   
+    
+    
     
 }
 
@@ -98,7 +130,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension HomeViewController: ImagesCollectionCellDelegate{
     func didSelectCell(atIndex: UIImage) {
-        print("GİRDİİ \(atIndex)")
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
@@ -124,7 +155,7 @@ extension HomeViewController: SelectedCategoryImage{
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     
-  
+    
     
     
 }

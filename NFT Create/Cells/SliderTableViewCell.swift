@@ -25,10 +25,11 @@ class SliderTableViewCell: UITableViewCell {
         getData.getSlidersData()
         sliderCollectionView.delegate = self
         sliderCollectionView.dataSource = self
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { (Timer) in
-            self.sliderCollectionView.reloadData()            
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
+            self.sliderCollectionView.reloadData()
+            print(self.getData.SliderArray.count)
         }
-        DispatchQueue.main.async {
+       DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,selector: #selector(self.changeImage), userInfo: nil, repeats: true)
         }
     }

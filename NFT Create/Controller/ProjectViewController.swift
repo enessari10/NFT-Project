@@ -8,20 +8,17 @@
 import UIKit
 import CoreData
 import ZLImageEditor
-
 class ProjectViewController: UIViewController {
     
     @IBOutlet var projectCollectionView: UICollectionView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getProjectData()
         projectCollectionView.delegate = self
         projectCollectionView.dataSource = self
-        print(getData.coreDataArray.count)
     }
     
     func getProjectData(){
@@ -39,53 +36,19 @@ class ProjectViewController: UIViewController {
     }
     
     func updateContext(projectName:String,projectImage:UIImage){
-        
-        let fetchUser: NSFetchRequest<UserProject> = UserProject.fetchRequest()
-         fetchUser.predicate = NSPredicate(format: "projectName= %@",projectName)
-
-        let results = try? getData.context.fetch(fetchUser)
-
-        if results?.count == 0 {
-            // here you are inserting
-            do{
-                let results = try getData.context.fetch(fetchUser)
-                let objectUpdate = results[0]
-                let imageAsNSData = projectImage.jpegData(compressionQuality: 1)
-                objectUpdate.setValue(projectName, forKey: "projectName")
-                objectUpdate.setValue(getData.currentDateTime, forKey: "date")
-                objectUpdate.setValue(imageAsNSData, forKey: "image")
-                try getData.context.save()
-            }
-            catch{
-                print("Error \(error)")
-            }
-         } else {
-            // here you are updating
-            //user = results?.first
-             print("NE İŞE YARIYOR BİLMİYORUM")
-         }
-
-        
-
-        
-        /*let entity = NSEntityDescription.entity(forEntityName: "UserProject", in: getData.context)
-        let request = NSFetchRequest<NSFetchRequestResult>()
-        request.entity = entity
-        let predicate = NSPredicate(format: "(projectName = %@)", projectName)
-        request.predicate = predicate
-        
+        let data = getData.coreDataArray[0] // items = [NSManagedObject]()
+        let imageAsNSData = projectImage.jpegData(compressionQuality: 1)
+        data.setValue(projectName, forKey: "projectName")
+        data.setValue(getData.currentDateTime, forKey: "date")
+        data.setValue(imageAsNSData, forKey: "image")
         do {
-            let results = try getData.context.fetch(request)
-            let objectUpdate = results[0] as! NSManagedObject
-            let imageAsNSData = projectImage.jpegData(compressionQuality: 1)
-            objectUpdate.setValue(projectName, forKey: "projectName")
-            objectUpdate.setValue(getData.currentDateTime, forKey: "date")
-            objectUpdate.setValue(imageAsNSData, forKey: "image")
-            getData.saveContext()
+            try getData.context.save()
+            
+        } catch {
+            
+            print(error)
         }
-        catch let error as NSError {
-            print("Error \(error)")
-        }*/
+        
     }
     func showImageEditor(selectImage:UIImage){
         ZLImageEditorConfiguration.default()
@@ -95,14 +58,14 @@ class ProjectViewController: UIViewController {
         ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
             UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
             var textField = UITextField()
-            let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Update project name", message: "", preferredStyle: .alert)
             alert.addTextField { alertTextField in
                 alertTextField.placeholder = "Project Name"
                 textField = alertTextField
             }
             
             let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
-                self!.updateContext(projectName: textField.text!, projectImage: selectImage)
+                self!.updateContext(projectName: textField.text!, projectImage: resImage)
                 self?.navigationController?.popViewController(animated: true)
             }
             alert.addAction(action)
@@ -129,13 +92,16 @@ class ProjectViewController: UIViewController {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
 }
 
 extension ProjectViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return getData.coreDataArray.count
     }
+   
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "projectCell", for: indexPath) as? ProjectCollectionViewCell else {fatalError()}
@@ -143,10 +109,40 @@ extension ProjectViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.projectImage.image = UIImage(data:getData.coreDataArray[indexPath.row].image!)
         return cell
     }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let picture = getData.coreDataArray[indexPath.row].image
-        let getImage = UIImage(data: picture!)
-        self.showImageEditor(selectImage: getImage!)
+        let refreshAlert = UIAlertController(title: "Choose", message: "Please the choose item", preferredStyle: UIAlertController.Style.alert)
+
+        refreshAlert.addAction(UIAlertAction(title: "Edit Project", style: .default, handler: { (action: UIAlertAction!) in
+            let picture = self.getData.coreDataArray[indexPath.row].image
+            let getImage = UIImage(data: picture!)
+            self.showImageEditor(selectImage: getImage!)
+
+        }))
+
+        refreshAlert.addAction(UIAlertAction(title: "Delete Project", style: .cancel, handler: { (action: UIAlertAction!) in
+            let fetchRequest = NSFetchRequest<UserProject>(entityName: "UserProject")
+            fetchRequest.predicate = NSPredicate(format:"projectName = %@", self.getData.coreDataArray[indexPath.row].projectName!)
+            do {
+                let objects = try self.getData.context.fetch(fetchRequest)
+                for object in objects {
+                    self.getData.context.delete(object)
+                    self.getData.coreDataArray.remove(at: indexPath.row)
+                }
+                try self.getData.context.save()
+            } catch _ {
+            }
+            self.projectCollectionView.reloadData()
+        }))
+
+        present(refreshAlert, animated: true, completion: nil)
+        
+       
+        
     }
     
 }
+
+
+
+

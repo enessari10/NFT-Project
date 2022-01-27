@@ -16,8 +16,8 @@ class BackgroundUIViewController: UIViewController {
     @IBOutlet var backgroundCollectionView: UICollectionView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-    
-    
+    let picker = UIImagePickerController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +28,54 @@ class BackgroundUIViewController: UIViewController {
             self.backgroundCollectionView.reloadData()
         }
         
-        
     }
     
     @IBAction func openGalleryButtonPressed(_ sender: UIButton) {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc,animated: true)
+        let alert:UIAlertController=UIAlertController(title: "Choose Image", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertAction.Style.default)
+        {
+            UIAlertAction in
+            self.openCamera()
+        }
+        let gallaryAction = UIAlertAction(title: "Gallery", style: UIAlertAction.Style.default)
+        {
+            UIAlertAction in
+            self.openGallary()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel)
+        {
+            UIAlertAction in
+        }
+        
+        // Add the actions
+        picker.delegate = self
+        alert.addAction(cameraAction)
+        alert.addAction(gallaryAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
+    
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+        {
+            picker.sourceType = UIImagePickerController.SourceType.camera
+            present(picker, animated: true, completion: nil)
+        }
+        else
+        {
+           //YOU DONT HAVE CAMERA DİYE ALERT BAS
+        }
+    }
+    func openGallary()
+    {
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     
     func showImageEditor(selectImage:UIImage){
         ZLImageEditorConfiguration.default()
@@ -127,8 +165,9 @@ extension BackgroundUIViewController: UIImagePickerControllerDelegate, UINavigat
             }
         }else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             showImageEditor(selectImage: image)
-            picker.dismiss(animated: true, completion: nil)
-            
+            picker.dismiss(animated: true){
+                self.showImageEditor(selectImage: image)
+            }
         }
     }
     

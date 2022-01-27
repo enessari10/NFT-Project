@@ -374,7 +374,9 @@
                                 </constraints>
                                 <color key="tintColor" name="ButtonColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Choose Photo"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Open Camera or Gallery">
+                                    <fontDescription key="titleFontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="openGalleryButtonPressed:" destination="j7h-Bf-Ob3" eventType="touchUpInside" id="AXh-HB-TTa"/>
                                 </connections>
@@ -478,77 +480,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fkf-af-cv2">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fkf-af-cv2">
                                 <rect key="frame" x="10" y="44" width="394" height="818"/>
                                 <color key="backgroundColor" name="MainColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="394" id="IGi-1h-jIl"/>
                                     <constraint firstAttribute="height" constant="818" id="O71-qh-0Ma"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qgl-AM-JpM">
-                                    <size key="itemSize" width="172" height="165"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qgl-AM-JpM">
+                                    <size key="itemSize" width="161" height="165"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="projectCell" id="KuB-Oy-VJq" customClass="ProjectCollectionViewCell" customModule="NFT_Create" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="172" height="165"/>
+                                        <rect key="frame" x="0.0" y="10" width="161" height="165"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="REh-6Y-wj3">
-                                            <rect key="frame" x="0.0" y="0.0" width="172" height="165"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="161" height="165"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="pva-Ec-w3B">
-                                                    <rect key="frame" x="0.0" y="12" width="160" height="133"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="133" id="DEg-g9-WHx"/>
-                                                        <constraint firstAttribute="width" constant="160" id="anJ-nL-kqO"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0KE-1g-hLD">
-                                                    <rect key="frame" x="0.0" y="138" width="160" height="27"/>
+                                                    <rect key="frame" x="0.0" y="138" width="161" height="27"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TA2-Qz-enp">
-                                                            <rect key="frame" x="0.0" y="3" width="152" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TA2-Qz-enp">
+                                                            <rect key="frame" x="0.0" y="3" width="161" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="161" id="S01-zK-PIw"/>
+                                                                <constraint firstAttribute="height" constant="21" id="TWv-cj-REx"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" name="ButtonColor"/>
-                                                </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYY-Lq-P1d">
-                                                    <rect key="frame" x="145" y="6" width="21" height="18"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="FKf-Ia-ig0"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="V6H-Pl-0j7"/>
+                                                        <constraint firstItem="TA2-Qz-enp" firstAttribute="top" secondItem="0KE-1g-hLD" secondAttribute="top" constant="3" id="GtV-m8-Xxd"/>
+                                                        <constraint firstItem="TA2-Qz-enp" firstAttribute="leading" secondItem="0KE-1g-hLD" secondAttribute="leading" id="cDH-Hj-Prx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TA2-Qz-enp" secondAttribute="trailing" id="cUT-jU-614"/>
+                                                        <constraint firstAttribute="height" constant="27" id="nJo-z5-ymL"/>
+                                                        <constraint firstAttribute="width" constant="161" id="sfd-n6-v1P"/>
+                                                        <constraint firstAttribute="bottom" secondItem="TA2-Qz-enp" secondAttribute="bottom" constant="3" id="t2s-r2-Pdx"/>
                                                     </constraints>
-                                                    <color key="tintColor" name="ButtonColor"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="tinted" title="x">
-                                                        <fontDescription key="titleFontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
-                                                        <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </buttonConfiguration>
-                                                </button>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="pva-Ec-w3B">
+                                                    <rect key="frame" x="0.0" y="0.0" width="161" height="142"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="161" id="X7n-nF-obT"/>
+                                                        <constraint firstAttribute="height" constant="142" id="pDF-Xi-1iL"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0KE-1g-hLD" firstAttribute="top" secondItem="xYY-Lq-P1d" secondAttribute="bottom" constant="114" id="8vT-Xc-bK7"/>
-                                                <constraint firstAttribute="trailing" secondItem="xYY-Lq-P1d" secondAttribute="trailing" constant="6" id="Fsp-20-dD1"/>
-                                                <constraint firstAttribute="trailing" secondItem="pva-Ec-w3B" secondAttribute="trailing" constant="12" id="LyD-0P-E1C"/>
-                                                <constraint firstItem="xYY-Lq-P1d" firstAttribute="leading" secondItem="REh-6Y-wj3" secondAttribute="leading" constant="145" id="OHs-ol-XgL"/>
-                                                <constraint firstItem="xYY-Lq-P1d" firstAttribute="top" secondItem="REh-6Y-wj3" secondAttribute="top" constant="6" id="OLJ-CW-lLL"/>
-                                                <constraint firstItem="pva-Ec-w3B" firstAttribute="top" secondItem="REh-6Y-wj3" secondAttribute="top" constant="12" id="XFy-d2-xLu"/>
-                                                <constraint firstItem="pva-Ec-w3B" firstAttribute="leading" secondItem="REh-6Y-wj3" secondAttribute="leading" id="cps-fS-TpI"/>
-                                                <constraint firstAttribute="bottom" secondItem="0KE-1g-hLD" secondAttribute="bottom" id="k5J-Ia-kFd"/>
-                                                <constraint firstItem="0KE-1g-hLD" firstAttribute="trailing" secondItem="pva-Ec-w3B" secondAttribute="trailing" id="lL9-Wf-Zql"/>
-                                                <constraint firstAttribute="bottom" secondItem="pva-Ec-w3B" secondAttribute="bottom" constant="20" id="pKI-y5-cw1"/>
-                                                <constraint firstItem="0KE-1g-hLD" firstAttribute="leading" secondItem="pva-Ec-w3B" secondAttribute="leading" id="s45-Z6-2je"/>
+                                                <constraint firstItem="pva-Ec-w3B" firstAttribute="top" secondItem="REh-6Y-wj3" secondAttribute="top" id="4QG-8r-T4Q"/>
+                                                <constraint firstItem="0KE-1g-hLD" firstAttribute="leading" secondItem="REh-6Y-wj3" secondAttribute="leading" id="5FQ-XI-qh3"/>
+                                                <constraint firstAttribute="bottom" secondItem="pva-Ec-w3B" secondAttribute="bottom" constant="23" id="8hR-js-ipQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="pva-Ec-w3B" secondAttribute="trailing" id="B8w-QZ-QxF"/>
+                                                <constraint firstAttribute="bottom" secondItem="0KE-1g-hLD" secondAttribute="bottom" id="NiT-t8-arb"/>
+                                                <constraint firstAttribute="trailing" secondItem="0KE-1g-hLD" secondAttribute="trailing" id="VbP-rd-sS6"/>
+                                                <constraint firstItem="pva-Ec-w3B" firstAttribute="leading" secondItem="REh-6Y-wj3" secondAttribute="leading" id="e6a-IQ-djK"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="172" height="165"/>
+                                        <size key="customSize" width="161" height="165"/>
                                         <connections>
                                             <outlet property="bgView" destination="0KE-1g-hLD" id="qhu-QR-m2h"/>
                                             <outlet property="projectImage" destination="pva-Ec-w3B" id="giZ-oN-S8C"/>

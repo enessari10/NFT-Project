@@ -35,8 +35,8 @@ class ProjectViewController: UIViewController {
         }
     }
     
-    func updateContext(projectName:String,projectImage:UIImage){
-        let data = getData.coreDataArray[0] // items = [NSManagedObject]()
+    func updateContext(projectName:String,projectImage:UIImage,selectProjectRow: Int){
+        let data = getData.coreDataArray[selectProjectRow] // items = [NSManagedObject]()
         let imageAsNSData = projectImage.jpegData(compressionQuality: 1)
         data.setValue(projectName, forKey: "projectName")
         data.setValue(getData.currentDateTime, forKey: "date")
@@ -52,7 +52,8 @@ class ProjectViewController: UIViewController {
         }
         
     }
-    func showImageEditor(selectImage:UIImage){
+    
+    func showImageEditor(selectImage:UIImage, projeNameDefault:String, projectIndexPath:Int){
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
@@ -63,12 +64,14 @@ class ProjectViewController: UIViewController {
             let alert = UIAlertController(title: "Update project name", message: "", preferredStyle: .alert)
             alert.addTextField { alertTextField in
                 alertTextField.placeholder = "Project Name"
+                alertTextField.text = projeNameDefault
                 textField = alertTextField
             }
             
             let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
-                self!.updateContext(projectName: textField.text!, projectImage: resImage)
-               
+                self!.updateContext(projectName: textField.text!, projectImage: resImage,selectProjectRow: projectIndexPath)
+                self!.getProjectData()
+
                 
             }
             alert.addAction(action)
@@ -77,6 +80,7 @@ class ProjectViewController: UIViewController {
             
         }
     }
+    
     @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
@@ -119,7 +123,8 @@ extension ProjectViewController: UICollectionViewDelegate, UICollectionViewDataS
         refreshAlert.addAction(UIAlertAction(title: "Edit Project", style: .default, handler: { (action: UIAlertAction!) in
             let picture = self.getData.coreDataArray[indexPath.row].image
             let getImage = UIImage(data: picture!)
-            self.showImageEditor(selectImage: getImage!)
+            let rowNumber : Int = indexPath.row
+            self.showImageEditor(selectImage: getImage!,projeNameDefault: self.getData.coreDataArray[indexPath.row].projectName!,projectIndexPath: rowNumber)
 
         }))
 

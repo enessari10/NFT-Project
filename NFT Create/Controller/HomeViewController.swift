@@ -58,7 +58,10 @@ class HomeViewController: UIViewController {
             newAdd.image = imageAsNSData
             self.getData.coreDataArray.append(newAdd)
             self.getData.saveContext()
-        }
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+            resultViewController.title = "My Projects"
+            self.navigationController?.pushViewController(resultViewController, animated: true)        }
         
         alert.addAction(action)
         present(alert, animated: true, completion: nil)

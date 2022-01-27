@@ -88,8 +88,6 @@ class BackgroundUIViewController: UIViewController {
             let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
             alert.addTextField { alertTextField in
                 alertTextField.placeholder = "Project Name"
-                
-                //Copy alertTextField in local variable to use in current block of code
                 textField = alertTextField
             }
             
@@ -101,7 +99,10 @@ class BackgroundUIViewController: UIViewController {
                 newAdd.image = imageAsNSData
                 self!.getData.coreDataArray.append(newAdd)
                 self!.getData.saveContext()
-                self?.navigationController?.popViewController(animated: true)
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+                resultViewController.title = "My Projects"
+                self?.navigationController?.pushViewController(resultViewController, animated: true)
             }
             alert.addAction(action)
             self!.present(alert, animated: true, completion: nil)

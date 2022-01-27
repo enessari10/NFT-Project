@@ -43,6 +43,8 @@ class ProjectViewController: UIViewController {
         data.setValue(imageAsNSData, forKey: "image")
         do {
             try getData.context.save()
+            projectCollectionView.reloadData()
+
             
         } catch {
             
@@ -66,7 +68,8 @@ class ProjectViewController: UIViewController {
             
             let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
                 self!.updateContext(projectName: textField.text!, projectImage: resImage)
-                self?.navigationController?.popViewController(animated: true)
+               
+                
             }
             alert.addAction(action)
             self!.present(alert, animated: true, completion: nil)

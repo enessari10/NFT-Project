@@ -73,16 +73,33 @@ class BackgroundUIViewController: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    
+    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
+
+        if (backgroundImage == nil) {
+            return frontImage!
+        }
+        let c = CGSize(width: 400, height: 400);
+
+        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
+
+        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
+        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
     
     
     
     func showImageEditor(selectImage:UIImage){
+        let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: selectImage)
+
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
         
-        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
             UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
             var textField = UITextField()
             let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)

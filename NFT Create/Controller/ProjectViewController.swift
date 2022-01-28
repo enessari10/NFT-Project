@@ -35,6 +35,23 @@ class ProjectViewController: UIViewController {
         }
     }
     
+    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
+
+        if (backgroundImage == nil) {
+            return frontImage!
+        }
+        let c = CGSize(width: 400, height: 400);
+
+        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
+
+        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
+        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return newImage
+    }
+    
     func updateContext(projectName:String,projectImage:UIImage,selectProjectRow: Int){
         let data = getData.coreDataArray[selectProjectRow] // items = [NSManagedObject]()
         let imageAsNSData = projectImage.jpegData(compressionQuality: 1)
@@ -54,11 +71,13 @@ class ProjectViewController: UIViewController {
     }
     
     func showImageEditor(selectImage:UIImage, projeNameDefault:String, projectIndexPath:Int){
+        let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: selectImage)
+
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
         
-        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
             UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
             var textField = UITextField()
             let alert = UIAlertController(title: "Update project name", message: "", preferredStyle: .alert)

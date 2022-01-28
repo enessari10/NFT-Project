@@ -14,10 +14,10 @@ class APIService{
     //Verileri JSON olarak getiren fonksiyon
     func getAllData(url : String, completion: @escaping (JSON) -> Void){
         DispatchQueue.main.async {
-            AF.request(url).responseJSON{ response in
+            AF.request(url).response{ response in
                 switch response.result{
                 case .success(let value):
-                    completion(JSON(value))
+                    completion(JSON(value as Any))
                 case .failure(let error):
                     print(error)
                     completion(JSON(error))

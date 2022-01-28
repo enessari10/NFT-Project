@@ -83,7 +83,7 @@ class GetDataClass{
             self.jsonData = json
             let data = json["Images"]
             data.array?.forEach({(cate) in
-                let imageAll = CategoryImageModel(imageURL: cate["imageUrl"].stringValue)
+                let imageAll = CategoryImageModel(imageURL: cate["imageUrl"].stringValue,isPro: cate["isPro"].stringValue)
                 self.CategoriesAllImages.append(imageAll)
             })
         }

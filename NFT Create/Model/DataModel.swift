@@ -28,4 +28,5 @@ struct BackgroundsModel{
 
 struct CategoryImageModel{
     var imageURL : String
+    var isPro : String
 }

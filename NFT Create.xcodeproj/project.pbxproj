@@ -30,11 +30,11 @@
 		BCED323B279E16DD003DC98B /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED323A279E16DD003DC98B /* DataModel.swift */; };
 		BCED323D279E1736003DC98B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED323C279E1736003DC98B /* APIService.swift */; };
 		BCED323F279E1826003DC98B /* GetDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED323E279E1826003DC98B /* GetDataClass.swift */; };
-		BCED3242279E1D2A003DC98B /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCED322D279E0308003DC98B /* Poppins-Bold.ttf */; };
-		BCED3243279E1D2A003DC98B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCED322C279E0308003DC98B /* Poppins-Medium.ttf */; };
-		BCED3244279E1D2A003DC98B /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCED322B279E0308003DC98B /* Poppins-Regular.ttf */; };
-		BCED3245279E1D2A003DC98B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCED322A279E0308003DC98B /* Poppins-SemiBold.ttf */; };
 		BCED3247279ED424003DC98B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED3246279ED424003DC98B /* Colors.swift */; };
+		F44C3B1827A4232900BDEE8F /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F42E4F4827A42269008782E4 /* Poppins-Bold.ttf */; };
+		F44C3B1927A4232900BDEE8F /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F42E4F4627A42268008782E4 /* Poppins-Medium.ttf */; };
+		F44C3B1A27A4232900BDEE8F /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F42E4F4727A42269008782E4 /* Poppins-Regular.ttf */; };
+		F44C3B1B27A4232900BDEE8F /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F42E4F4927A42269008782E4 /* Poppins-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,10 +53,6 @@
 		BCED3217279E0275003DC98B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCED321A279E0275003DC98B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCED321C279E0275003DC98B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCED322A279E0308003DC98B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		BCED322B279E0308003DC98B /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		BCED322C279E0308003DC98B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		BCED322D279E0308003DC98B /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		BCED322E279E1538003DC98B /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		BCED3230279E155C003DC98B /* AllCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		BCED3232279E1583003DC98B /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -70,6 +66,10 @@
 		E808F86B1E03D2F095FE97BD /* Pods_NFT_Create.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NFT_Create.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF11FF7D9F817353F103BD0E /* Pods-NFT Create.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFT Create.debug.xcconfig"; path = "Target Support Files/Pods-NFT Create/Pods-NFT Create.debug.xcconfig"; sourceTree = "<group>"; };
 		F2F79BAE121949D4DF2F938E /* Pods-NFT Create.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFT Create.release.xcconfig"; path = "Target Support Files/Pods-NFT Create/Pods-NFT Create.release.xcconfig"; sourceTree = "<group>"; };
+		F42E4F4627A42268008782E4 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		F42E4F4727A42269008782E4 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		F42E4F4827A42269008782E4 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		F42E4F4927A42269008782E4 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../NFT Creator Documents/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,10 +194,10 @@
 		BCED3228279E02B3003DC98B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				BCED322D279E0308003DC98B /* Poppins-Bold.ttf */,
-				BCED322C279E0308003DC98B /* Poppins-Medium.ttf */,
-				BCED322B279E0308003DC98B /* Poppins-Regular.ttf */,
-				BCED322A279E0308003DC98B /* Poppins-SemiBold.ttf */,
+				F42E4F4827A42269008782E4 /* Poppins-Bold.ttf */,
+				F42E4F4627A42268008782E4 /* Poppins-Medium.ttf */,
+				F42E4F4727A42269008782E4 /* Poppins-Regular.ttf */,
+				F42E4F4927A42269008782E4 /* Poppins-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -278,10 +278,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCED3242279E1D2A003DC98B /* Poppins-Bold.ttf in Resources */,
-				BCED3243279E1D2A003DC98B /* Poppins-Medium.ttf in Resources */,
-				BCED3244279E1D2A003DC98B /* Poppins-Regular.ttf in Resources */,
-				BCED3245279E1D2A003DC98B /* Poppins-SemiBold.ttf in Resources */,
+				F44C3B1827A4232900BDEE8F /* Poppins-Bold.ttf in Resources */,
+				F44C3B1927A4232900BDEE8F /* Poppins-Medium.ttf in Resources */,
+				F44C3B1A27A4232900BDEE8F /* Poppins-Regular.ttf in Resources */,
+				F44C3B1B27A4232900BDEE8F /* Poppins-SemiBold.ttf in Resources */,
 				BCED321B279E0275003DC98B /* LaunchScreen.storyboard in Resources */,
 				BCED3218279E0275003DC98B /* Assets.xcassets in Resources */,
 				BCED3213279E0274003DC98B /* Main.storyboard in Resources */,
@@ -504,11 +504,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6HN7DT422;
+				DEVELOPMENT_TEAM = 6RKZW66GL2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -519,8 +523,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "saida.NFT-Create";
+				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.saida.com.tr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -533,11 +538,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6HN7DT422;
+				DEVELOPMENT_TEAM = 6RKZW66GL2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -548,8 +557,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "saida.NFT-Create";
+				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.saida.com.tr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

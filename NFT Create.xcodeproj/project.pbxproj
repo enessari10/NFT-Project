@@ -511,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6RKZW66GL2;
+				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
@@ -545,7 +545,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6RKZW66GL2;
+				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";

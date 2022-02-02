@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet var homeTableView: UITableView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-    let bottomImage = UIImage(named: "logo.png")
+    let bottomLogo = UIImage(named: "bgFrame.png")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,22 +38,16 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     
-    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
-
-        if (backgroundImage == nil) {
-            return frontImage!
-        }
-        let c = CGSize(width: 400, height: 400);
-
-        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
-
-        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
-        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(topImage.size)
+        
+        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
+        topImage.draw(in: areaSize)
+        bottomImage.draw(in: CGRect.init(x: 700, y: 350, width: 100, height: 100))
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
-        return newImage
-    }
+        return mergedImage
+      }
     
     func saveGallery(resImage:UIImage){
         UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -100,10 +94,6 @@ class HomeViewController: UIViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-    
 }
 
 
@@ -137,7 +127,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 1{
             return 160
         }else if indexPath.row >= 2{
-            return 600
+            return 475
         }else{
             return 165
         }
@@ -147,8 +137,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension HomeViewController: ImagesCollectionCellDelegate{
     func didSelectCell(atIndex: UIImage) {
-        let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: atIndex)
-
+        let image = self.mergeWith(topImage: atIndex, bottomImage: bottomLogo!)
 
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])

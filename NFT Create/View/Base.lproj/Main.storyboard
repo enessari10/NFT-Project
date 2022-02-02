@@ -32,9 +32,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nc-UY-UyZ">
+                                <rect key="frame" x="0.0" y="806" width="202" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="aG8-Pa-ZSW"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="202" id="pzY-LA-gnB"/>
+                                </constraints>
+                                <color key="tintColor" name="ButtonColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="plus.circle.fill" catalog="system" title="Create">
+                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xCi-6T-cXx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfN-gh-cUP">
+                                <rect key="frame" x="212" y="806" width="202" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="202" id="skW-fz-QwG"/>
+                                    <constraint firstAttribute="height" constant="90" id="vjM-uZ-DHM"/>
+                                </constraints>
+                                <color key="tintColor" name="ButtonColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="folder.fill" catalog="system" title="Project">
+                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="projectButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zwn-o9-sTM"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9vc-wO-uLb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="710"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="1bz-qW-ERY"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sliderCell" rowHeight="242" id="Jy7-IF-Sdl" customClass="SliderTableViewCell" customModule="NFT_Create" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="242"/>
@@ -102,7 +135,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9KE-uf-Iu3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="65x-bA-o2t">
                                                                         <rect key="frame" x="13" y="78" width="75" height="21"/>
@@ -161,11 +194,11 @@
                                             <outlet property="allCategoriesCollectionView" destination="YjC-Z2-RS4" id="7XX-0A-eWC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" rowHeight="264" id="n9H-j5-SHl" customClass="CategoryTableViewCell" customModule="NFT_Create" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="446.5" width="414" height="264"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" rowHeight="273" id="n9H-j5-SHl" customClass="CategoryTableViewCell" customModule="NFT_Create" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="446.5" width="414" height="273"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n9H-j5-SHl" id="iJ7-XN-YIe">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="264"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="273"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ckv-Ej-zz3">
@@ -175,20 +208,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I2k-Ay-njC">
-                                                    <rect key="frame" x="0.0" y="31.5" width="414" height="600"/>
+                                                    <rect key="frame" x="0.0" y="31.5" width="414" height="500"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="600" id="sGC-qD-FFF"/>
+                                                        <constraint firstAttribute="height" constant="500" id="J5Q-UN-DUn"/>
+                                                        <constraint firstAttribute="width" constant="414" id="hL5-rb-6p6"/>
                                                     </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KZe-uw-oMg">
                                                         <size key="itemSize" width="128" height="122"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="allCategoryCollectionCell" id="kYd-pQ-pwF" customClass="CategoryCollectionViewCell" customModule="NFT_Create" customModuleProvider="target">
-                                                            <rect key="frame" x="12" y="0.0" width="125" height="125"/>
+                                                            <rect key="frame" x="8" y="0.0" width="125" height="125"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
@@ -247,11 +281,11 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ckv-Ej-zz3" secondAttribute="trailing" constant="20" symbolic="YES" id="2bp-ST-a93"/>
-                                                <constraint firstItem="I2k-Ay-njC" firstAttribute="top" secondItem="Ckv-Ej-zz3" secondAttribute="bottom" constant="5" id="MHt-mp-b7R"/>
-                                                <constraint firstAttribute="trailing" secondItem="I2k-Ay-njC" secondAttribute="trailing" id="b0G-dm-KUk"/>
+                                                <constraint firstItem="I2k-Ay-njC" firstAttribute="top" secondItem="Ckv-Ej-zz3" secondAttribute="bottom" constant="5" id="3rh-CX-MKN"/>
+                                                <constraint firstItem="I2k-Ay-njC" firstAttribute="leading" secondItem="iJ7-XN-YIe" secondAttribute="leading" id="4Nb-Yv-Oyu"/>
+                                                <constraint firstAttribute="trailing" secondItem="I2k-Ay-njC" secondAttribute="trailing" id="eEB-9p-Gem"/>
                                                 <constraint firstItem="Ckv-Ej-zz3" firstAttribute="leading" secondItem="iJ7-XN-YIe" secondAttribute="leadingMargin" constant="-6" id="l3P-VD-26N"/>
                                                 <constraint firstItem="Ckv-Ej-zz3" firstAttribute="top" secondItem="iJ7-XN-YIe" secondAttribute="topMargin" constant="-7" id="o4z-mw-r2h"/>
-                                                <constraint firstItem="I2k-Ay-njC" firstAttribute="leading" secondItem="iJ7-XN-YIe" secondAttribute="leading" id="pFq-Y4-rCV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -261,50 +295,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nc-UY-UyZ">
-                                <rect key="frame" x="0.0" y="806" width="202" height="90"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="aG8-Pa-ZSW"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="202" id="pzY-LA-gnB"/>
-                                </constraints>
-                                <color key="tintColor" name="ButtonColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="plus.circle.fill" catalog="system" title="Create">
-                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="createButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xCi-6T-cXx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfN-gh-cUP">
-                                <rect key="frame" x="212" y="806" width="202" height="90"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="202" id="skW-fz-QwG"/>
-                                    <constraint firstAttribute="height" constant="90" id="vjM-uZ-DHM"/>
-                                </constraints>
-                                <color key="tintColor" name="ButtonColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="folder.fill" catalog="system" title="Project">
-                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="projectButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zwn-o9-sTM"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="MainColor"/>
                         <constraints>
-                            <constraint firstItem="9vc-wO-uLb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1uP-da-Teg"/>
-                            <constraint firstItem="4nc-UY-UyZ" firstAttribute="top" secondItem="9vc-wO-uLb" secondAttribute="bottom" constant="8" id="9AW-Mw-fsC"/>
                             <constraint firstItem="hfN-gh-cUP" firstAttribute="leading" secondItem="4nc-UY-UyZ" secondAttribute="trailing" constant="10" id="CpR-tH-K39"/>
                             <constraint firstAttribute="bottom" secondItem="hfN-gh-cUP" secondAttribute="bottom" id="FEW-g9-1wn"/>
                             <constraint firstItem="4nc-UY-UyZ" firstAttribute="width" secondItem="hfN-gh-cUP" secondAttribute="width" id="FHT-8f-nwY"/>
                             <constraint firstAttribute="bottom" secondItem="4nc-UY-UyZ" secondAttribute="bottom" id="HKL-qG-UJe"/>
+                            <constraint firstItem="9vc-wO-uLb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LCn-Ee-bVX"/>
+                            <constraint firstItem="4nc-UY-UyZ" firstAttribute="top" secondItem="9vc-wO-uLb" secondAttribute="bottom" constant="8" symbolic="YES" id="LdI-DQ-DX6"/>
                             <constraint firstItem="hfN-gh-cUP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VNf-hM-L7d"/>
-                            <constraint firstItem="9vc-wO-uLb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vDl-WT-5VF"/>
+                            <constraint firstItem="9vc-wO-uLb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bYT-IM-Mtg"/>
+                            <constraint firstItem="9vc-wO-uLb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oBx-fy-NLq"/>
                             <constraint firstItem="4nc-UY-UyZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vxl-Ux-iDT"/>
-                            <constraint firstItem="9vc-wO-uLb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="x5n-gw-Qub"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="NFT Creator" id="eEH-bi-X8U"/>
@@ -330,15 +334,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="758" id="drg-GG-5oO"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="ECv-Bw-xMG">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="2" sectionInsetReference="safeArea" id="ECv-Bw-xMG">
                                     <size key="itemSize" width="138" height="114"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="5" minY="10" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="backgorundsCell" id="0IN-cG-rWZ" customClass="BackgorundCollectionViewCell" customModule="NFT_Create" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="10" width="138" height="115"/>
+                                        <rect key="frame" x="0.0" y="5" width="138" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xaz-4y-sZM">
                                             <rect key="frame" x="0.0" y="0.0" width="138" height="115"/>
@@ -440,7 +444,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghk-4N-kgC">
                                                     <rect key="frame" x="92" y="4" width="42" height="18"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLs-4b-H7M">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLs-4b-H7M">
                                                             <rect key="frame" x="5" y="2" width="32" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="2Dr-bw-cOm"/>
@@ -741,7 +745,7 @@
             <color red="0.30199998617172241" green="0.43900001049041748" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor">
-            <color red="0.027000000700354576" green="0.050999999046325684" blue="0.13699999451637268" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.027450980392156862" green="0.050980392156862744" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

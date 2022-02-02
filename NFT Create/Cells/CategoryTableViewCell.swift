@@ -46,8 +46,12 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "allCategoryCollectionCell", for: indexPath) as? CategoryCollectionViewCell else {fatalError() }
-        cell.categoryImage.kf.indicatorType = .activity
-        cell.categoryImage.kf.setImage(with: URL(string: getData.ImagesArray[indexPath.row].imageURL), placeholder: nil, options: [.transition((.fade(0.7)))], progressBlock: nil)
+        
+        AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
+            if case .success(let getImage) = response.result {
+                cell.categoryImage.image = getImage
+            }
+        }
         cell.stateLabel.text = getData.ImagesArray[indexPath.row].imagePro
         return cell
     }
@@ -59,5 +63,6 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
     }
+    
     
 }

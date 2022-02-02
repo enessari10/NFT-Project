@@ -23,9 +23,10 @@ class AllCategoryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        getData.getCategoriesData()
+
         allCategoriesCollectionView.delegate = self
         allCategoriesCollectionView.dataSource = self
-        getData.getCategoriesData()
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
             self.allCategoriesCollectionView.reloadData()
         }

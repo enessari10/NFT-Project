@@ -17,7 +17,8 @@ class BackgroundUIViewController: UIViewController {
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
     let picker = UIImagePickerController()
-
+    let bottomLogo = UIImage(named: "bgFrame.png")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ class BackgroundUIViewController: UIViewController {
         }
         else
         {
-           //YOU DONT HAVE CAMERA DİYE ALERT BAS
+            //YOU DONT HAVE CAMERA DİYE ALERT BAS
         }
     }
     func openGallary()
@@ -73,33 +74,26 @@ class BackgroundUIViewController: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
+    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(topImage.size)
+        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
+        topImage.draw(in: areaSize)
+        bottomImage.draw(in: CGRect.init(x: 700, y: 350, width: 100, height: 100))
 
-        if (backgroundImage == nil) {
-            return frontImage!
-        }
-        let c = CGSize(width: 400, height: 400);
-
-        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
-
-        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
-        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
-        return newImage
+        return mergedImage
     }
     
     
     
     func showImageEditor(selectImage:UIImage){
-        let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: selectImage)
-
+        
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
         
-        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
             UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
             var textField = UITextField()
             let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
@@ -178,20 +172,21 @@ extension BackgroundUIViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             picker.dismiss(animated: true) {
-                self.showImageEditor(selectImage: image)
+                let image1 = self.mergeWith(topImage: image, bottomImage: self.bottomLogo!)
+                self.showImageEditor(selectImage: image1)
                 
             }
         }else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             showImageEditor(selectImage: image)
             picker.dismiss(animated: true){
-                self.showImageEditor(selectImage: image)
+                let image2 = self.mergeWith(topImage: image, bottomImage: self.bottomLogo!)
+                self.showImageEditor(selectImage: image2)
             }
         }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        
     }
     
 }

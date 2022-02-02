@@ -39,22 +39,17 @@ class CategoryImagesViewController: UIViewController {
         
         
     }
-    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
-
-        if (backgroundImage == nil) {
-            return frontImage!
-        }
-        let c = CGSize(width: 400, height: 400);
-
-        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
-
-        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
-        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(topImage.size)
+        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
+        topImage.draw(in: areaSize)
+        bottomImage.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: 300 * 0.2, dy: 300 * 0.2))
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
-        return newImage
+        return mergedImage
     }
+    
+    
     
     func saveGallery(resImage:UIImage){
         UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -91,20 +86,19 @@ extension CategoryImagesViewController: UICollectionViewDelegate, UICollectionVi
         cell.categoryImage.kf.indicatorType = .activity
         cell.isProLabel.text = getData.CategoriesAllImages[indexPath.row].isPro
         cell.categoryImage.kf.setImage(with: URL(string: getData.CategoriesAllImages[indexPath.row].imageURL), placeholder: nil, options: [.transition((.fade(0.7)))], progressBlock: nil)
-
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
         
         AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
             if case .success(let getImage) = response.result {
-                let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: getImage)
-
+                let image = self.mergeWith(topImage: getImage, bottomImage: UIImage.init(named: "logo.png")!)
                 ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
                     self!.saveGallery(resImage: resImage)
                 }

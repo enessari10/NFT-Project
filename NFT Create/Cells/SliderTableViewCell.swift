@@ -29,9 +29,7 @@ class SliderTableViewCell: UITableViewCell {
             self.sliderCollectionView.reloadData()
             print(self.getData.SliderArray.count)
         }
-       DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-        }
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,selector: #selector(self.changeImage), userInfo: nil, repeats: true)
     }
     @objc func changeImage(){
         if counter < getData.SliderArray.count{

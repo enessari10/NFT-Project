@@ -13,7 +13,8 @@ class ProjectViewController: UIViewController {
     @IBOutlet var projectCollectionView: UICollectionView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-    
+    let bottomLogo = UIImage(named: "logo.png")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getProjectData()
@@ -35,21 +36,14 @@ class ProjectViewController: UIViewController {
         }
     }
     
-    func mergedImageWith(frontImage:UIImage?, backgroundImage: UIImage?) -> UIImage{
-
-        if (backgroundImage == nil) {
-            return frontImage!
-        }
-        let c = CGSize(width: 400, height: 400);
-
-        UIGraphicsBeginImageContextWithOptions(c, false, 0.0)
-
-        backgroundImage?.draw(in: CGRect.init(x: 0, y: 0, width: 400, height: 400))
-        frontImage?.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: c.width * 0.2, dy: c.height * 0.2))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(topImage.size)
+        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
+        topImage.draw(in: areaSize)
+        bottomImage.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: 300 * 0.2, dy: 300 * 0.2))
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
-        return newImage
+        return mergedImage
     }
     
     func updateContext(projectName:String,projectImage:UIImage,selectProjectRow: Int){
@@ -71,7 +65,7 @@ class ProjectViewController: UIViewController {
     }
     
     func showImageEditor(selectImage:UIImage, projeNameDefault:String, projectIndexPath:Int){
-        let image = self.mergedImageWith(frontImage: UIImage.init(named: "logo.png"), backgroundImage: selectImage)
+        let image = self.mergeWith(topImage: selectImage, bottomImage: bottomLogo!)
 
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
@@ -161,7 +155,11 @@ extension ProjectViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             self.projectCollectionView.reloadData()
         }))
-
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+                                             
         present(refreshAlert, animated: true, completion: nil)
         
        

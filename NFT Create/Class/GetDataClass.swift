@@ -23,7 +23,7 @@ class GetDataClass{
     var coreDataArray = [UserProject]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let currentDateTime = Date()
-
+    var resultImageEditModel: ZLEditImageModel?
     var apiService = APIService()
     var url = "https://enessari.com/nftcreator/NFTModel.json"
     var jsonData = JSON()
@@ -33,7 +33,6 @@ class GetDataClass{
     func getCategoriesData(){
         self.apiService.getAllData(url: self.url) { json in
             self.jsonData = json
-            print(json)
             let data = json["Categories"]
             data.array?.forEach({(cate) in
                 let categoryDataModel = CategoriesModel(categoryName: cate["categoryName"].stringValue,categoryImage: cate["categoryImage"].stringValue, categoryURL: cate["categoryURL"].stringValue)
@@ -48,7 +47,7 @@ class GetDataClass{
             self.jsonData = json
             let data = json["Images"]
             data.array?.forEach({(cate) in
-                let imagesDataModel = ImagesModel(imageURL: cate["imageURL"].stringValue,imagePro: cate["isPro"].stringValue)
+                let imagesDataModel = ImagesModel(imageURL: cate["imageUrl"].stringValue,imagePro: cate["isPro"].stringValue)
                 self.ImagesArray.append(imagesDataModel)
             })
         }
@@ -91,13 +90,11 @@ class GetDataClass{
     }
     
     func saveContext(){
-        
         do{
             try context.save()
             
         }catch{
             print("Save Error")
         }
-        
     }
 }

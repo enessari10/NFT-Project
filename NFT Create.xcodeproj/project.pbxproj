@@ -511,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6HN7DT422;
+				DEVELOPMENT_TEAM = R9U6484S9J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
@@ -527,7 +527,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.saida.com.tr;
+				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -545,7 +545,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T6HN7DT422;
+				DEVELOPMENT_TEAM = R9U6484S9J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
@@ -561,7 +561,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.saida.com.tr;
+				PRODUCT_BUNDLE_IDENTIFIER = nftcreate.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

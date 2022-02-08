@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 5.4)
   - Kingfisher (7.1.2)
   - SwiftyJSON (5.0.1)
+  - SwiftyStoreKit (0.16.1)
   - ZLImageEditor (1.0.4):
     - ZLImageEditor/Core (= 1.0.4)
   - ZLImageEditor/Core (1.0.4)
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Kingfisher
   - Kingfisher (~> 7.0)
   - SwiftyJSON
+  - SwiftyStoreKit
   - ZLImageEditor
 
 SPEC REPOS:
@@ -22,6 +24,7 @@ SPEC REPOS:
     - AlamofireImage
     - Kingfisher
     - SwiftyJSON
+    - SwiftyStoreKit
     - ZLImageEditor
 
 SPEC CHECKSUMS:
@@ -29,8 +32,9 @@ SPEC CHECKSUMS:
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   ZLImageEditor: a196851f7a11b5e06123ed4bc34d2aff1ff7c86c
 
-PODFILE CHECKSUM: 7f5d79f3e7d0e623ee1f23a6d801acc27671e304
+PODFILE CHECKSUM: 81c31c227f51ebf83c85f297eae22dcca851b89a
 
 COCOAPODS: 1.11.2

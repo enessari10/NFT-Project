@@ -17,8 +17,8 @@ class BackgroundUIViewController: UIViewController {
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
     let picker = UIImagePickerController()
-    let bottomLogo = UIImage(named: "bgFrame.png")
-    
+    var imageClass = MergeImageClass()
+    var coreDataClass = CoreDataClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +47,6 @@ class BackgroundUIViewController: UIViewController {
         {
             UIAlertAction in
         }
-        
-        // Add the actions
         picker.delegate = self
         alert.addAction(cameraAction)
         alert.addAction(gallaryAction)
@@ -65,7 +63,7 @@ class BackgroundUIViewController: UIViewController {
         }
         else
         {
-            //YOU DONT HAVE CAMERA DİYE ALERT BAS
+            print("Error Camera")
         }
     }
     func openGallary()
@@ -74,16 +72,7 @@ class BackgroundUIViewController: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
-        UIGraphicsBeginImageContext(topImage.size)
-        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
-        topImage.draw(in: areaSize)
-        bottomImage.draw(in: CGRect.init(x: 700, y: 350, width: 100, height: 100))
-
-        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return mergedImage
-    }
+    
     
     
     
@@ -103,13 +92,13 @@ class BackgroundUIViewController: UIViewController {
             }
             
             let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
-                let newAdd = UserProject(context: self!.getData.context)
+                let newAdd = UserProject(context: self!.coreDataClass.context)
                 newAdd.projectName = textField.text!
-                newAdd.date = self!.getData.currentDateTime
+                newAdd.date = self!.coreDataClass.currentDateTime
                 let imageAsNSData = resImage.jpegData(compressionQuality: 1)
                 newAdd.image = imageAsNSData
-                self!.getData.coreDataArray.append(newAdd)
-                self!.getData.saveContext()
+                self!.coreDataClass.coreDataArray.append(newAdd)
+                self!.coreDataClass.saveContext()
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
                 resultViewController.title = "My Projects"
@@ -152,12 +141,13 @@ extension BackgroundUIViewController: UICollectionViewDelegate, UICollectionView
         cell.backgroundImage.kf.setImage(with: URL(string: getData.BackgroundsArray[indexPath.row].imageURL), placeholder: nil, options: [.transition((.fade(0.7)))], progressBlock: nil)
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let urlImage = getData.BackgroundsArray[indexPath.row].imageURL
         AF.request(urlImage).responseImage { response in
             if case .success(let getImage) = response.result {
-                self.showImageEditor(selectImage: getImage)
-                
+                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
+                self.showImageEditor(selectImage: image)
             }
         }
     }
@@ -172,15 +162,15 @@ extension BackgroundUIViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             picker.dismiss(animated: true) {
-                let image1 = self.mergeWith(topImage: image, bottomImage: self.bottomLogo!)
-                self.showImageEditor(selectImage: image1)
+                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
+                self.showImageEditor(selectImage: image)
                 
             }
         }else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             showImageEditor(selectImage: image)
             picker.dismiss(animated: true){
-                let image2 = self.mergeWith(topImage: image, bottomImage: self.bottomLogo!)
-                self.showImageEditor(selectImage: image2)
+                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
+                self.showImageEditor(selectImage: image)
             }
         }
     }

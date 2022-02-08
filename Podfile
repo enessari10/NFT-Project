@@ -12,4 +12,6 @@ target 'NFT Create' do
   pod 'AlamofireImage'
   pod 'Kingfisher', '~> 7.0'
   pod 'ZLImageEditor'
+  pod 'SwiftyStoreKit'
+
 end

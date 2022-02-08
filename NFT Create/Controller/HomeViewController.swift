@@ -14,17 +14,23 @@ class HomeViewController: UIViewController {
     @IBOutlet var homeTableView: UITableView!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
-    let bottomLogo = UIImage(named: "bgFrame.png")
+    var imageClass = MergeImageClass()
+    var coreDataClass = CoreDataClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.dataSource = self
         homeTableView.delegate = self
         
-        
     }
     
     
+    @IBAction func paymentButtonPressed(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentScreenViewController") as! PaymentScreenViewController
+
+        self.navigationController?.pushViewController(resultViewController, animated: true)
+    }
     @IBAction func createButtonPressed(_ sender: UIButton) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "BackgroundUIViewController") as! BackgroundUIViewController
@@ -38,16 +44,8 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     
-    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
-        UIGraphicsBeginImageContext(topImage.size)
-        
-        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
-        topImage.draw(in: areaSize)
-        bottomImage.draw(in: CGRect.init(x: 700, y: 350, width: 100, height: 100))
-        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return mergedImage
-      }
+    
+    
     
     func saveGallery(resImage:UIImage){
         UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -57,15 +55,14 @@ class HomeViewController: UIViewController {
             alertTextField.placeholder = "Project Name"
             textField = alertTextField
         }
-        
         let action = UIAlertAction(title: "Add item", style: .default) { action in
-            let newAdd = UserProject(context: self.getData.context)
+            let newAdd = UserProject(context: self.coreDataClass.context)
             newAdd.projectName = textField.text!
-            newAdd.date = self.getData.currentDateTime
+            newAdd.date = self.coreDataClass.currentDateTime
             let imageAsNSData = resImage.jpegData(compressionQuality: 1)
             newAdd.image = imageAsNSData
-            self.getData.coreDataArray.append(newAdd)
-            self.getData.saveContext()
+            self.coreDataClass.coreDataArray.append(newAdd)
+            self.coreDataClass.saveContext()
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
             resultViewController.title = "My Projects"
@@ -137,14 +134,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 
 extension HomeViewController: ImagesCollectionCellDelegate{
     func didSelectCell(atIndex: UIImage) {
-        let image = self.mergeWith(topImage: atIndex, bottomImage: bottomLogo!)
-
+        let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: atIndex)
         ZLImageEditorConfiguration.default()
             .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
             .adjustTools([.brightness, .contrast, .saturation])
         
         ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
-            self!.saveGallery(resImage: resImage)
+           self!.saveGallery(resImage: resImage)
         }
         
     }
@@ -155,16 +151,10 @@ extension HomeViewController: ImagesCollectionCellDelegate{
 extension HomeViewController: SelectedCategoryImage{
     
     func didSelectGoToPage(categoryName: String, categoryURL: String) {
-        
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "CategoryImagesViewController") as! CategoryImagesViewController
-        
         resultViewController.title = categoryName
         resultViewController.getURL = categoryURL
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
-    
-    
-    
-    
 }

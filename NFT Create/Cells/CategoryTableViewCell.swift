@@ -20,7 +20,8 @@ class CategoryTableViewCell: UITableViewCell {
     var getData = GetDataClass()
     var selectImage = UIImage()
     var delegate : ImagesCollectionCellDelegate?
-
+    var iapHelper = IAPHelper()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         categoryCollectionView.dataSource = self
@@ -29,6 +30,13 @@ class CategoryTableViewCell: UITableViewCell {
         getData.getImagesData()
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
             self.categoryCollectionView.reloadData()
+        }
+        if getData.state == .isTrue{
+            print("PROOO KULLANICI ÇALIŞTIIII")
+        }
+        else{
+            print("FREE KULLANICI ÇALIŞTIIII")
+
         }
     }
     
@@ -56,13 +64,27 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
-            if case .success(let getImage) = response.result {
-                self.delegate?.didSelectCell(atIndex: getImage)
-
+        if getData.ImagesArray[indexPath.row].imagePro == "PRO"{
+            if getData.state == .isTrue{
+                AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
+                    if case .success(let getImage) = response.result {
+                        self.delegate?.didSelectCell(atIndex: getImage)
+                    }
+                }
+            }
+            else{
+                // Ödeme sayfasına yönlendirme
+            }
+        } else{
+            AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
+                if case .success(let getImage) = response.result {
+                    self.delegate?.didSelectCell(atIndex: getImage)
+                }
             }
         }
+        
     }
-    
-    
 }
+
+
+

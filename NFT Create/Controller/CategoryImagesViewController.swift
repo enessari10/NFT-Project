@@ -17,6 +17,8 @@ class CategoryImagesViewController: UIViewController {
     var getData = GetDataClass()
     var getURL : String = ""
     var resultImageEditModel: ZLEditImageModel?
+    var imageClass = MergeImageClass()
+    var coreDataClass = CoreDataClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,20 +41,30 @@ class CategoryImagesViewController: UIViewController {
         
         
     }
-    func mergeWith(topImage: UIImage, bottomImage:UIImage) -> UIImage {
-        UIGraphicsBeginImageContext(topImage.size)
-        let areaSize = CGRect(x: 0, y: 0, width: topImage.size.width, height: topImage.size.height)
-        topImage.draw(in: areaSize)
-        bottomImage.draw(in: CGRect.init(x: 270, y: 240, width: 230, height: 220).insetBy(dx: 300 * 0.2, dy: 300 * 0.2))
-        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return mergedImage
-    }
-    
-    
-    
     func saveGallery(resImage:UIImage){
         UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+        alert.addTextField { alertTextField in
+            alertTextField.placeholder = "Project Name"
+            textField = alertTextField
+        }
+        let action = UIAlertAction(title: "Add item", style: .default) { action in
+            let newAdd = UserProject(context: self.coreDataClass.context)
+            newAdd.projectName = textField.text!
+            newAdd.date = self.coreDataClass.currentDateTime
+            let imageAsNSData = resImage.jpegData(compressionQuality: 1)
+            newAdd.image = imageAsNSData
+            self.coreDataClass.coreDataArray.append(newAdd)
+            self.coreDataClass.saveContext()
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+            resultViewController.title = "My Projects"
+            self.navigationController?.pushViewController(resultViewController, animated: true)        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
         
     }
     @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -91,18 +103,35 @@ extension CategoryImagesViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        ZLImageEditorConfiguration.default()
-            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
-            .adjustTools([.brightness, .contrast, .saturation])
-        
-        AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
-            if case .success(let getImage) = response.result {
-                let image = self.mergeWith(topImage: getImage, bottomImage: UIImage.init(named: "logo.png")!)
-                ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
-                    self!.saveGallery(resImage: resImage)
+        if getData.ImagesArray[indexPath.row].imagePro == "PRO"{
+            if getData.state == .isTrue{
+                ZLImageEditorConfiguration.default()
+                    .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+                    .adjustTools([.brightness, .contrast, .saturation])
+                AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
+                    if case .success(let getImage) = response.result {
+                        let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
+                        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
+                            self!.saveGallery(resImage: resImage)
+                        }
+                        
+                    }
                 }
-                
+            }else{
+                //Ödeme sayfasına yönlendir.
+            }
+        }else{
+            ZLImageEditorConfiguration.default()
+                .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+                .adjustTools([.brightness, .contrast, .saturation])
+            AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
+                if case .success(let getImage) = response.result {
+                    let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
+                    ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
+                        self!.saveGallery(resImage: resImage)
+                    }
+                    
+                }
             }
         }
         

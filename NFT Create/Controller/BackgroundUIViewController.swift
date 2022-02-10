@@ -19,6 +19,7 @@ class BackgroundUIViewController: UIViewController {
     let picker = UIImagePickerController()
     var imageClass = MergeImageClass()
     var coreDataClass = CoreDataClass()
+    let isPro = UserDefaults.standard.bool(forKey: "isPro")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,8 +147,12 @@ extension BackgroundUIViewController: UICollectionViewDelegate, UICollectionView
         let urlImage = getData.BackgroundsArray[indexPath.row].imageURL
         AF.request(urlImage).responseImage { response in
             if case .success(let getImage) = response.result {
-                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
-                self.showImageEditor(selectImage: image)
+                if self.isPro == true{
+                    self.showImageEditor(selectImage: getImage)
+                }else{
+                    let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
+                    self.showImageEditor(selectImage: image)
+                }
             }
         }
     }
@@ -162,15 +167,22 @@ extension BackgroundUIViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             picker.dismiss(animated: true) {
-                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
-                self.showImageEditor(selectImage: image)
-                
+                if self.isPro == true{
+                    self.showImageEditor(selectImage: image)
+                }else{
+                    let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
+                    self.showImageEditor(selectImage: image)
+                }
             }
         }else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             showImageEditor(selectImage: image)
             picker.dismiss(animated: true){
-                let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
-                self.showImageEditor(selectImage: image)
+                if self.isPro == true{
+                    self.showImageEditor(selectImage: image)
+                }else{
+                    let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: image)
+                    self.showImageEditor(selectImage: image)
+                }
             }
         }
     }

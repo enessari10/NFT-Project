@@ -7,46 +7,57 @@
 
 import UIKit
 
-class PaymentScreenViewController: UIViewController,InAppPurchaseDelegate {
-    var iapHelper = IAPHelper()
-    var getData = GetDataClass()
+class PaymentScreenViewController: UIViewController{
+    
     @IBOutlet var weekLabel: UILabel!
-
+    var iAPHelper = IAPHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        iapHelper.delegate = self
-        iapHelper.getIAPlocalPrice()
-        if getData.userDefaults.bool(forKey: iapHelper.productID) {
-            getData.state = .isTrue
-        }
+        iAPHelper.getIAPlocalPrice()
+        iAPHelper.delegate = self
+       
     }
     
     
     @IBAction func paymentButtonPressed(_ sender: Any) {
-        iapHelper.purchase()
+        iAPHelper.purchase()
     }
     
+    @IBAction func restoreButtonPressed(_ sender: Any) {
+        iAPHelper.restorePurchase()
+    }
+    
+    
+}
+extension PaymentScreenViewController: InAppPurchaseDelegate {
+    
     func restoreDidSucceed() {
-        getData.userDefaults.setValue(true, forKey: iapHelper.productID)
-        getData.state = .isTrue
+        let isPro = true
+        UserDefaults.standard.set(isPro, forKey: "isPro")
+        navigationController?.popViewController(animated: true)
     }
     
     func purchaseDidSucceed() {
-        getData.userDefaults.setValue(true, forKey: iapHelper.productID)
-        getData.state = .isTrue
+        
+        let isPro = true
+        UserDefaults.standard.set(isPro, forKey: "isPro")
+        navigationController?.popViewController(animated: true)
+        
     }
     
     func nothingToRestore() {
-        //
+        
+        // Maybe  show a nice message saying nothing found
     }
     
     func paymentCancelled() {
-        print("PAYMENT CANCEL")
+
+        // maybe stop a UIactivityIndicator
     }
     
     func returnIAPlocalPrice(localPrice: String) {
-        weekLabel.text = "Week for \(localPrice)"
+        weekLabel.text = "Buy for \(localPrice)"
     }
-    
     
 }

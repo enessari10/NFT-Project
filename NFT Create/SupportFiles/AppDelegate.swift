@@ -14,29 +14,46 @@ import SwiftyStoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
+    var iapHelper = IAPHelper()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let cache = ImageCache.default
         cache.memoryStorage.config.totalCostLimit = 1024 * 1024 * 10
-        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
-            for purchase in purchases {
-                switch purchase.transaction.transactionState {
-                case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
-                    // Unlock content
-                case .failed, .purchasing, .deferred:
-                    break // do nothing
-                @unknown default: break
-                    
-                }
-                
-            }
-        }
+        setupIAP()
         return true
     }
+    
+    func setupIAP() {
+            SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+                for purchase in purchases {
+                    switch purchase.transaction.transactionState {
+                    case .purchased, .restored:
+                        let isPro = true
+                        UserDefaults.standard.set(isPro, forKey: "isPro")
+                        let downloads = purchase.transaction.downloads
+                        if !downloads.isEmpty {
+                            SwiftyStoreKit.start(downloads)
+                        } else if purchase.needsFinishTransaction {
+                            // Deliver content from server, then:
+                            SwiftyStoreKit.finishTransaction(purchase.transaction)
+                        }
+                    case .failed, .purchasing, .deferred:
+                        break // do nothing
+                    @unknown default:
+                        break // do nothing
+                    }
+                }
+            }
+            SwiftyStoreKit.updatedDownloadsHandler = { downloads in
+
+                // contentURL is not nil if downloadState == .finished
+                let contentURLs = downloads.compactMap { $0.contentURL }
+                if contentURLs.count == downloads.count {
+                    print("Saving: \(contentURLs)")
+                    SwiftyStoreKit.finishTransaction(downloads[0].transaction)
+                }
+            }
+        }
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

@@ -19,6 +19,8 @@ class CategoryImagesViewController: UIViewController {
     var resultImageEditModel: ZLEditImageModel?
     var imageClass = MergeImageClass()
     var coreDataClass = CoreDataClass()
+    let isPro = UserDefaults.standard.bool(forKey: "isPro")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,31 +43,39 @@ class CategoryImagesViewController: UIViewController {
         
         
     }
-    func saveGallery(resImage:UIImage){
-        UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
-        alert.addTextField { alertTextField in
-            alertTextField.placeholder = "Project Name"
-            textField = alertTextField
+    func showImageEditor(selectImage:UIImage){
+        
+        ZLImageEditorConfiguration.default()
+            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+            .adjustTools([.brightness, .contrast, .saturation])
+        
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+            UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
+            var textField = UITextField()
+            let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+            alert.addTextField { alertTextField in
+                alertTextField.placeholder = "Project Name"
+                textField = alertTextField
+            }
+            
+            let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
+                let newAdd = UserProject(context: self!.coreDataClass.context)
+                newAdd.projectName = textField.text!
+                newAdd.date = self!.coreDataClass.currentDateTime
+                let imageAsNSData = resImage.jpegData(compressionQuality: 1)
+                newAdd.image = imageAsNSData
+                self!.coreDataClass.coreDataArray.append(newAdd)
+                self!.coreDataClass.saveContext()
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+                resultViewController.title = "My Projects"
+                self?.navigationController?.pushViewController(resultViewController, animated: true)
+            }
+            alert.addAction(action)
+            self!.present(alert, animated: true, completion: nil)
+            
+            
         }
-        let action = UIAlertAction(title: "Add item", style: .default) { action in
-            let newAdd = UserProject(context: self.coreDataClass.context)
-            newAdd.projectName = textField.text!
-            newAdd.date = self.coreDataClass.currentDateTime
-            let imageAsNSData = resImage.jpegData(compressionQuality: 1)
-            newAdd.image = imageAsNSData
-            self.coreDataClass.coreDataArray.append(newAdd)
-            self.coreDataClass.saveContext()
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
-            resultViewController.title = "My Projects"
-            self.navigationController?.pushViewController(resultViewController, animated: true)        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        
-        
     }
     @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -78,7 +88,6 @@ class CategoryImagesViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }))
             present(ac, animated: false)
-            
         }
     }
     
@@ -98,43 +107,28 @@ extension CategoryImagesViewController: UICollectionViewDelegate, UICollectionVi
         cell.categoryImage.kf.indicatorType = .activity
         cell.isProLabel.text = getData.CategoriesAllImages[indexPath.row].isPro
         cell.categoryImage.kf.setImage(with: URL(string: getData.CategoriesAllImages[indexPath.row].imageURL), placeholder: nil, options: [.transition((.fade(0.7)))], progressBlock: nil)
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if getData.ImagesArray[indexPath.row].imagePro == "PRO"{
-            if getData.state == .isTrue{
-                ZLImageEditorConfiguration.default()
-                    .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
-                    .adjustTools([.brightness, .contrast, .saturation])
-                AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
-                    if case .success(let getImage) = response.result {
+        let urlImage = getData.CategoriesAllImages[indexPath.row].imageURL
+        AF.request(urlImage).responseImage { response in
+            if case .success(let getImage) = response.result {
+                if self.isPro == true{
+                    self.showImageEditor(selectImage: getImage)
+                } else if self.isPro == false{
+                    if self.getData.CategoriesAllImages[indexPath.row].isPro == "Pro"{
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentScreenViewController") as! PaymentScreenViewController
+                        self.navigationController?.pushViewController(resultViewController, animated: true)
+                    }else{
                         let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
-                        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
-                            self!.saveGallery(resImage: resImage)
-                        }
-                        
+                        self.showImageEditor(selectImage: image)
                     }
-                }
-            }else{
-                //Ödeme sayfasına yönlendir.
-            }
-        }else{
-            ZLImageEditorConfiguration.default()
-                .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
-                .adjustTools([.brightness, .contrast, .saturation])
-            AF.request(getData.CategoriesAllImages[indexPath.row].imageURL).responseImage { response in
-                if case .success(let getImage) = response.result {
-                    let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
-                    ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: self.resultImageEditModel) { [weak self] (resImage, editModel) in
-                        self!.saveGallery(resImage: resImage)
-                    }
-                    
                 }
             }
         }
-        
     }
-    
 }
+
+

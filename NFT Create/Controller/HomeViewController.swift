@@ -8,19 +8,34 @@
 import UIKit
 import ZLImageEditor
 import CoreData
+import SwiftyStoreKit
+
+
 
 class HomeViewController: UIViewController {
     
     @IBOutlet var homeTableView: UITableView!
+    @IBOutlet var paymentButton: UIBarButtonItem!
     var getData = GetDataClass()
     var resultImageEditModel: ZLEditImageModel?
     var imageClass = MergeImageClass()
     var coreDataClass = CoreDataClass()
+    var iAPHelper = IAPHelper()
+    let isPro = UserDefaults.standard.bool(forKey: "isPro")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeTableView.dataSource = self
-        homeTableView.delegate = self
+        self.homeTableView.dataSource = self
+        self.homeTableView.delegate = self
+        if UserDefaults.standard.bool(forKey: "isPro") == true{
+            paymentButton.isEnabled = false
+        }else{
+            paymentButton.isEnabled = true
+        }
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
         
     }
     
@@ -28,7 +43,7 @@ class HomeViewController: UIViewController {
     @IBAction func paymentButtonPressed(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentScreenViewController") as! PaymentScreenViewController
-
+        
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     @IBAction func createButtonPressed(_ sender: UIButton) {
@@ -47,31 +62,39 @@ class HomeViewController: UIViewController {
     
     
     
-    func saveGallery(resImage:UIImage){
-        UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
-        alert.addTextField { alertTextField in
-            alertTextField.placeholder = "Project Name"
-            textField = alertTextField
+    func showImageEditor(selectImage:UIImage){
+        
+        ZLImageEditorConfiguration.default()
+            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
+            .adjustTools([.brightness, .contrast, .saturation])
+        
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: selectImage, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
+            UIImageWriteToSavedPhotosAlbum(resImage, self, #selector(self!.imageFunc(_:didFinishSavingWithError:contextInfo:)), nil)
+            var textField = UITextField()
+            let alert = UIAlertController(title: "Add project", message: "", preferredStyle: .alert)
+            alert.addTextField { alertTextField in
+                alertTextField.placeholder = "Project Name"
+                textField = alertTextField
+            }
+            
+            let action = UIAlertAction(title: "Add item", style: .default) { [self] action in
+                let newAdd = UserProject(context: self!.coreDataClass.context)
+                newAdd.projectName = textField.text!
+                newAdd.date = self!.coreDataClass.currentDateTime
+                let imageAsNSData = resImage.jpegData(compressionQuality: 1)
+                newAdd.image = imageAsNSData
+                self!.coreDataClass.coreDataArray.append(newAdd)
+                self!.coreDataClass.saveContext()
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
+                resultViewController.title = "My Projects"
+                self?.navigationController?.pushViewController(resultViewController, animated: true)
+            }
+            alert.addAction(action)
+            self!.present(alert, animated: true, completion: nil)
+            
+            
         }
-        let action = UIAlertAction(title: "Add item", style: .default) { action in
-            let newAdd = UserProject(context: self.coreDataClass.context)
-            newAdd.projectName = textField.text!
-            newAdd.date = self.coreDataClass.currentDateTime
-            let imageAsNSData = resImage.jpegData(compressionQuality: 1)
-            newAdd.image = imageAsNSData
-            self.coreDataClass.coreDataArray.append(newAdd)
-            self.coreDataClass.saveContext()
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ProjectViewController") as! ProjectViewController
-            resultViewController.title = "My Projects"
-            self.navigationController?.pushViewController(resultViewController, animated: true)        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        
-        
     }
     @objc func imageFunc(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -84,7 +107,6 @@ class HomeViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }))
             present(ac, animated: false)
-            
         }
     }
     
@@ -133,16 +155,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension HomeViewController: ImagesCollectionCellDelegate{
-    func didSelectCell(atIndex: UIImage) {
-        let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: atIndex)
-        ZLImageEditorConfiguration.default()
-            .editImageTools([.draw, .clip, .imageSticker, .textSticker, .mosaic, .filter, .adjust])
-            .adjustTools([.brightness, .contrast, .saturation])
+    
+    func didSelectCell(atIndexImage: UIImage,atIndex:Bool, isPro:String) {
         
-        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: resultImageEditModel) { [weak self] (resImage, editModel) in
-           self!.saveGallery(resImage: resImage)
-        }
-        
+        self.showImageEditor(selectImage: atIndexImage)
+    }
+    
+    
+    
+    
+    
+    
+    
+    func isNotProNextPage() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentScreenViewController") as! PaymentScreenViewController
+        self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     
     

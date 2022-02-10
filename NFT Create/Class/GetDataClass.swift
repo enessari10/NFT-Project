@@ -12,10 +12,7 @@ import SwiftyJSON
 import ZLImageEditor
 import CoreData
 
-enum NFTInAppPaymentState {
-    case isTrue
-    case isFalse
-}
+
 
 class GetDataClass{
     
@@ -29,9 +26,6 @@ class GetDataClass{
     var apiService = APIService()
     var url = "https://enessari.com/nftcreator/NFTModel.json"
     var jsonData = JSON()
-    let userDefaults = UserDefaults.standard
-    var state = NFTInAppPaymentState .isFalse
-
     
     //Kategoriler arrayinde isim ve resimi data modeline göre oluşmuş arraya append ediyor
     func getCategoriesData(){

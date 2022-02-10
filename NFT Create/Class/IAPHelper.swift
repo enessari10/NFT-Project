@@ -2,10 +2,11 @@
 //  IAPHelper.swift
 //  NFT Create
 //
-//  Created by Enes on 8.02.2022.
+//  Created by Enes on 9.02.2022.
 //
 import Foundation
 import SwiftyStoreKit
+import UIKit
 
 protocol InAppPurchaseDelegate: AnyObject {
     
@@ -21,15 +22,15 @@ class IAPHelper {
     
     weak var delegate: InAppPurchaseDelegate?
     let productID = "nftcreatesaida"
+
     
     func getIAPlocalPrice(){
+            
         SwiftyStoreKit.retrieveProductsInfo([productID]) { [self] result in
                 if let product = result.retrievedProducts.first {
                     let priceString = product.localizedPrice!
                     print("Product: \(product.localizedDescription), price: \(priceString)")
-                    
                     delegate?.returnIAPlocalPrice(localPrice: priceString)
-                    
                 }
                 else if let invalidProductId = result.invalidProductIDs.first {
                     print("Invalid product identifier: \(invalidProductId)")
@@ -38,6 +39,7 @@ class IAPHelper {
                     print("Error: \(String(describing: result.error))")
                 }
             }
+        
     }
     
     func restorePurchase() {
@@ -48,7 +50,6 @@ class IAPHelper {
             }
             else if results.restoredPurchases.count > 0 {
                 print("Restore Success: \(results.restoredPurchases)")
-                
                 delegate?.restoreDidSucceed()
             }
             else {
@@ -65,7 +66,6 @@ class IAPHelper {
         SwiftyStoreKit.purchaseProduct(productID, quantity: 1, atomically: true) { [self] result in
             switch result {
             case .success:
-                
                 delegate?.purchaseDidSucceed()
                 
             case .error(let error):
@@ -88,4 +88,6 @@ class IAPHelper {
             }
         }
     }
+    
+    
 }

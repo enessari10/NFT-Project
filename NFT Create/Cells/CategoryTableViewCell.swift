@@ -11,7 +11,8 @@ import AlamofireImage
 import Kingfisher
 
 protocol ImagesCollectionCellDelegate {
-    func didSelectCell(atIndex:UIImage)
+    func didSelectCell(atIndexImage:UIImage, atIndex:Bool, isPro:String)
+    func isNotProNextPage()
 }
 
 class CategoryTableViewCell: UITableViewCell {
@@ -21,7 +22,9 @@ class CategoryTableViewCell: UITableViewCell {
     var selectImage = UIImage()
     var delegate : ImagesCollectionCellDelegate?
     var iapHelper = IAPHelper()
-    
+    let isPro = UserDefaults.standard.bool(forKey: "isPro")
+    var imageClass = MergeImageClass()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         categoryCollectionView.dataSource = self
@@ -30,13 +33,6 @@ class CategoryTableViewCell: UITableViewCell {
         getData.getImagesData()
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (Timer) in
             self.categoryCollectionView.reloadData()
-        }
-        if getData.state == .isTrue{
-            print("PROOO KULLANICI ÇALIŞTIIII")
-        }
-        else{
-            print("FREE KULLANICI ÇALIŞTIIII")
-
         }
     }
     
@@ -64,26 +60,33 @@ extension CategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if getData.ImagesArray[indexPath.row].imagePro == "PRO"{
-            if getData.state == .isTrue{
+        
+      
+            if isPro == true{
                 AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
                     if case .success(let getImage) = response.result {
-                        self.delegate?.didSelectCell(atIndex: getImage)
+                        self.delegate?.didSelectCell(atIndexImage: getImage,atIndex: true,isPro: self.getData.ImagesArray[indexPath.row].imagePro)
+                        }
                     }
-                }
             }
             else{
-                // Ödeme sayfasına yönlendirme
-            }
-        } else{
-            AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
-                if case .success(let getImage) = response.result {
-                    self.delegate?.didSelectCell(atIndex: getImage)
+                // Proya tıkladı ama kullanıcı pro değil
+                if getData.ImagesArray[indexPath.row].imagePro=="Free"{
+                    AF.request(getData.ImagesArray[indexPath.row].imageURL).responseImage { response in
+                        if case .success(let getImage) = response.result {
+                            let image = self.imageClass.mergeWith(topImage: self.imageClass.topImageLogo!, bottomImage: getImage)
+                            self.delegate?.didSelectCell(atIndexImage: image,atIndex: true,isPro: self.getData.ImagesArray[indexPath.row].imagePro)
+                            }
+                        }
+                }else{
+                    delegate?.isNotProNextPage()
+
                 }
             }
-        }
+          
         
     }
+    
 }
 
 

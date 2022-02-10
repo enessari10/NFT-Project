@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -228,7 +227,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="109" height="108"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="nftImage2" translatesAutoresizingMaskIntoConstraints="NO" id="wuX-D7-ciP">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="wuX-D7-ciP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="109" height="108"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="108" id="AK8-vl-fVX"/>
@@ -244,11 +243,10 @@
                                                                                     <constraint firstAttribute="height" constant="15" id="MF6-uY-YeS"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </label>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="zBp-Qg-qj0" firstAttribute="centerY" secondItem="00C-jh-tFq" secondAttribute="centerY" id="JXt-hA-bmj"/>
                                                                             <constraint firstItem="zBp-Qg-qj0" firstAttribute="centerX" secondItem="00C-jh-tFq" secondAttribute="centerX" id="kmF-IW-i0F"/>
@@ -323,6 +321,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="homeTableView" destination="9vc-wO-uLb" id="heB-TN-oSF"/>
+                        <outlet property="paymentButton" destination="rPX-1Z-sTB" id="K2N-9M-9qB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -460,8 +459,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="CJi-dK-eo4"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -695,7 +693,7 @@
                                     <action selector="paymentButtonPressed:" destination="UUR-yd-1cL" eventType="touchUpInside" id="WuU-Li-UbM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyO-MM-wsM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyO-MM-wsM">
                                 <rect key="frame" x="81" y="440" width="253" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Pg-lW-G1Q"/>
@@ -705,6 +703,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8T-Ko-dd6">
+                                <rect key="frame" x="20" y="566" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="YhN-Dt-k2G"/>
+                                    <constraint firstAttribute="width" constant="374" id="v7M-gL-Yij"/>
+                                </constraints>
+                                <color key="tintColor" name="ButtonColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Restore">
+                                    <fontDescription key="titleFontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="restoreButtonPressed:" destination="UUR-yd-1cL" eventType="touchUpInside" id="P5x-dL-jkB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ftY-JP-DmI"/>
                         <color key="backgroundColor" name="MainColor"/>
@@ -720,8 +733,11 @@
                             <constraint firstItem="Bvm-vf-NtM" firstAttribute="top" secondItem="YHU-vG-oHT" secondAttribute="bottom" constant="206" id="Igl-dM-ui7"/>
                             <constraint firstItem="ftY-JP-DmI" firstAttribute="trailing" secondItem="YHU-vG-oHT" secondAttribute="trailing" constant="20" id="ZVN-lE-CSA"/>
                             <constraint firstItem="72p-0R-onC" firstAttribute="leading" secondItem="ftY-JP-DmI" secondAttribute="leading" constant="20" id="a18-OK-P3l"/>
+                            <constraint firstItem="i8T-Ko-dd6" firstAttribute="leading" secondItem="ftY-JP-DmI" secondAttribute="leading" constant="20" id="box-r9-Ity"/>
+                            <constraint firstItem="i8T-Ko-dd6" firstAttribute="top" secondItem="72p-0R-onC" secondAttribute="bottom" constant="8" id="f7L-sc-jHx"/>
                             <constraint firstItem="YHU-vG-oHT" firstAttribute="top" secondItem="ftY-JP-DmI" secondAttribute="top" id="h4d-8D-8FI"/>
                             <constraint firstItem="72p-0R-onC" firstAttribute="top" secondItem="Bvm-vf-NtM" secondAttribute="bottom" constant="95" id="lCC-nd-rzq"/>
+                            <constraint firstItem="ftY-JP-DmI" firstAttribute="trailing" secondItem="i8T-Ko-dd6" secondAttribute="trailing" constant="20" id="mNR-fe-6dR"/>
                             <constraint firstItem="ftY-JP-DmI" firstAttribute="trailing" secondItem="Uej-49-Wn8" secondAttribute="trailing" constant="92" id="sCI-Y1-B0e"/>
                         </constraints>
                     </view>
@@ -766,7 +782,6 @@
     <resources>
         <image name="bgFrame" width="319.33334350585938" height="316"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
-        <image name="nftImage2" width="43.333332061767578" height="43.333332061767578"/>
         <image name="placeholder" width="640" height="426.66665649414062"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="ButtonColor">
@@ -775,8 +790,5 @@
         <namedColor name="MainColor">
             <color red="0.027000000700354576" green="0.050999999046325684" blue="0.13699999451637268" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

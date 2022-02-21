@@ -27,6 +27,8 @@ class GetDataClass{
     var url = "https://enessari.com/nftcreator/NFTModel.json"
     var jsonData = JSON()
     
+    
+    
     //Kategoriler arrayinde isim ve resimi data modeline göre oluşmuş arraya append ediyor
     func getCategoriesData(){
         self.apiService.getAllData(url: self.url) { json in

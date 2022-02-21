@@ -83,6 +83,7 @@ extension ProjectViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.projectName.text = coreDataClass.coreDataArray[indexPath.row].projectName
         cell.projectImage.image = UIImage(data:coreDataClass.coreDataArray[indexPath.row].image!)
         return cell
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

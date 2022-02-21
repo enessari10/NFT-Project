@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CED5E4BB4B6AA1E38EC7096 /* Pods_NFT_Create.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E808F86B1E03D2F095FE97BD /* Pods_NFT_Create.framework */; };
 		BC65C4F227A42A0F00A859EB /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC65C4F127A42A0F00A859EB /* Poppins-Bold.ttf */; };
 		BC65C4F427A430F400A859EB /* PaymentScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC65C4F327A430F400A859EB /* PaymentScreenViewController.swift */; };
+		BC77B85927BCE94A00449A42 /* Pods_NFT_Create.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E808F86B1E03D2F095FE97BD /* Pods_NFT_Create.framework */; };
+		BC77B85C27BCE94C00449A42 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC4B40227B3B38700D41B7A /* StoreKit.framework */; };
 		BC84A18827B16054009542E7 /* MergeImageClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84A18727B16054009542E7 /* MergeImageClass.swift */; };
 		BC84A18A27B1616B009542E7 /* CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84A18927B1616B009542E7 /* CoreDataClass.swift */; };
 		BCB411E127A17E710063118F /* CategoryImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E027A17E710063118F /* CategoryImagesViewController.swift */; };
 		BCB411E327A17F190063118F /* CategoryImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E227A17F190063118F /* CategoryImageCollectionViewCell.swift */; };
 		BCB411E527A1AE1D0063118F /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E427A1AE1D0063118F /* ProjectCollectionViewCell.swift */; };
 		BCB411E727A1AE6F0063118F /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E627A1AE6F0063118F /* ProjectViewController.swift */; };
-		BCC4B40327B3B38700D41B7A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC4B40227B3B38700D41B7A /* StoreKit.framework */; };
 		BCC4B40527B4034400D41B7A /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4B40427B4034400D41B7A /* IAPHelper.swift */; };
 		BCE4689627A01B3C0005BD2B /* BackgroundUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4689527A01B3C0005BD2B /* BackgroundUIViewController.swift */; };
 		BCE4689827A01BBA0005BD2B /* BackgorundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4689727A01BBA0005BD2B /* BackgorundCollectionViewCell.swift */; };
@@ -87,8 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CED5E4BB4B6AA1E38EC7096 /* Pods_NFT_Create.framework in Frameworks */,
-				BCC4B40327B3B38700D41B7A /* StoreKit.framework in Frameworks */,
+				BC77B85927BCE94A00449A42 /* Pods_NFT_Create.framework in Frameworks */,
+				BC77B85C27BCE94C00449A42 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,8 +526,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N629FC23V7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
@@ -542,13 +542,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saidasoftware.nftcreate;
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enessari.nftcreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -560,8 +560,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N629FC23V7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
@@ -576,13 +576,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saidasoftware.nftcreate;
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enessari.nftcreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

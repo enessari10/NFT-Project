@@ -23,11 +23,15 @@ class HomeViewController: UIViewController {
     var iAPHelper = IAPHelper()
     let isPro = UserDefaults.standard.bool(forKey: "isPro")
     
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.homeTableView.dataSource = self
         self.homeTableView.delegate = self
+        
         if UserDefaults.standard.bool(forKey: "isPro") == true{
             paymentButton.isEnabled = false
         }else{
@@ -142,11 +146,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
-            return 242
+            return 250
         }else if indexPath.row == 1{
-            return 160
+            return 200
         }else if indexPath.row >= 2{
-            return 475
+            return 300
         }else{
             return 165
         }

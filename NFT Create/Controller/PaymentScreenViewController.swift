@@ -6,27 +6,48 @@
 //
 
 import UIKit
+import SafariServices
 
 class PaymentScreenViewController: UIViewController{
     
-    @IBOutlet var weekLabel: UILabel!
+    @IBOutlet var paymentButton: UIButton!
     var iAPHelper = IAPHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         iAPHelper.getIAPlocalPrice()
         iAPHelper.delegate = self
-       
+        paymentButton.isHidden = true
     }
     
+    @IBAction func restoreButton(_ sender: Any) {
+        iAPHelper.restorePurchase()
+
+    }
+    @IBAction func privacyPolicy(_ sender: Any) {
+        if let url = URL(string: "https://enessari.com/nftcreator/privacy.html") {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+
+               let vc = SFSafariViewController(url: url, configuration: config)
+               present(vc, animated: true)
+           }
+    }
     
+    @IBAction func termsOfUse(_ sender: Any) {
+        if let url = URL(string: "https://enessari.com/nftcreator/terms.html") {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+
+               let vc = SFSafariViewController(url: url, configuration: config)
+               present(vc, animated: true)
+           }
+    }
     @IBAction func paymentButtonPressed(_ sender: Any) {
         iAPHelper.purchase()
     }
     
-    @IBAction func restoreButtonPressed(_ sender: Any) {
-        iAPHelper.restorePurchase()
-    }
+    
     
     
 }
@@ -48,16 +69,23 @@ extension PaymentScreenViewController: InAppPurchaseDelegate {
     
     func nothingToRestore() {
         
-        // Maybe  show a nice message saying nothing found
+        navigationController?.popViewController(animated: true)
     }
     
     func paymentCancelled() {
-
-        // maybe stop a UIactivityIndicator
+        let ac = UIAlertController(title: "Error", message: "Payment Cancelled", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            self.navigationController?.popViewController(animated: true)
+        }
+        ac.addAction(okAction)
+        self.present(ac, animated: true)
     }
     
     func returnIAPlocalPrice(localPrice: String) {
-        weekLabel.text = "Buy for \(localPrice)"
+        paymentButton.setTitle("\(localPrice) / Month", for:.normal)
+        paymentButton.isHidden = false
+
     }
     
 }

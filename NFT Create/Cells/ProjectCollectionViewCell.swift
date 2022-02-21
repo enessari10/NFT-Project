@@ -16,9 +16,7 @@ class ProjectCollectionViewCell: UICollectionViewCell {
 
 
     override func awakeFromNib() {
-        projectImage.layer.cornerRadius = 10
-        bgView.layer.cornerRadius = 10
-        bgView.layer.maskedCorners = [.layerMinXMaxYCorner ,.layerMaxXMaxYCorner]
+        projectImage.layer.cornerRadius = 20
        
 
     }

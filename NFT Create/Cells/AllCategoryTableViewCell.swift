@@ -53,11 +53,7 @@ extension AllCategoryTableViewCell: UICollectionViewDelegate, UICollectionViewDa
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let bgColor = colors.cellColorArray[indexPath.row  % colors.cellColorArray.count]
-        cell.contentView.backgroundColor = bgColor
-        cell.contentView.layer.cornerRadius = 10
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

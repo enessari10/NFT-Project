@@ -28,7 +28,6 @@ class CoreDataClass{
         let sortDescriptors = [sectionSortDescriptor]
         let request : NSFetchRequest<UserProject> = UserProject.fetchRequest()
         request.sortDescriptors = sortDescriptors
-        
         do{
             coreDataArray = try context.fetch(request)
         }catch{

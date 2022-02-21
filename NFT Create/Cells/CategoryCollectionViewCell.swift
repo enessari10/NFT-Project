@@ -9,11 +9,9 @@ import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var stateView: UIView!
     @IBOutlet var stateLabel: UILabel!
     @IBOutlet var categoryImage: UIImageView!
     override func awakeFromNib() {
-        categoryImage.layer.cornerRadius = 10
-        stateView.layer.cornerRadius = 10
+        categoryImage.layer.cornerRadius = 15
     }
 }

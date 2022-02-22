@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import Kingfisher
 import SwiftyStoreKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let cache = ImageCache.default
         cache.memoryStorage.config.totalCostLimit = 1024 * 1024 * 10
         setupIAP()
+        FirebaseApp.configure()
         if #available(iOS 13, *){
             let appearance = UINavigationBarAppearance()
             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]

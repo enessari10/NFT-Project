@@ -13,6 +13,14 @@
 		BC77B85C27BCE94C00449A42 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC4B40227B3B38700D41B7A /* StoreKit.framework */; };
 		BC84A18827B16054009542E7 /* MergeImageClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84A18727B16054009542E7 /* MergeImageClass.swift */; };
 		BC84A18A27B1616B009542E7 /* CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC84A18927B1616B009542E7 /* CoreDataClass.swift */; };
+		BCA1C7A427C4F56700DBF732 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCA1C7A327C4F56700DBF732 /* GoogleService-Info.plist */; };
+		BCA1C7A727C4F71800DBF732 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7A627C4F71800DBF732 /* FirebaseAnalytics */; };
+		BCA1C7A927C4F71800DBF732 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7A827C4F71800DBF732 /* FirebaseAnalyticsSwift-Beta */; };
+		BCA1C7AB27C4F71800DBF732 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7AA27C4F71800DBF732 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		BCA1C7AD27C4F71800DBF732 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7AC27C4F71800DBF732 /* FirebaseCrashlytics */; };
+		BCA1C7AF27C4F71800DBF732 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7AE27C4F71800DBF732 /* FirebaseFirestore */; };
+		BCA1C7B127C4F71800DBF732 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7B027C4F71800DBF732 /* FirebaseFirestoreCombine-Community */; };
+		BCA1C7B327C4F71800DBF732 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BCA1C7B227C4F71800DBF732 /* FirebaseFirestoreSwift-Beta */; };
 		BCB411E127A17E710063118F /* CategoryImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E027A17E710063118F /* CategoryImagesViewController.swift */; };
 		BCB411E327A17F190063118F /* CategoryImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E227A17F190063118F /* CategoryImageCollectionViewCell.swift */; };
 		BCB411E527A1AE1D0063118F /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB411E427A1AE1D0063118F /* ProjectCollectionViewCell.swift */; };
@@ -47,6 +55,7 @@
 		BC65C4F327A430F400A859EB /* PaymentScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreenViewController.swift; sourceTree = "<group>"; };
 		BC84A18727B16054009542E7 /* MergeImageClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeImageClass.swift; sourceTree = "<group>"; };
 		BC84A18927B1616B009542E7 /* CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClass.swift; sourceTree = "<group>"; };
+		BCA1C7A327C4F56700DBF732 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCB411E027A17E710063118F /* CategoryImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryImagesViewController.swift; sourceTree = "<group>"; };
 		BCB411E227A17F190063118F /* CategoryImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		BCB411E427A1AE1D0063118F /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProjectCollectionViewCell.swift; path = "NFT Create/Cells/ProjectCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -88,7 +97,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC77B85927BCE94A00449A42 /* Pods_NFT_Create.framework in Frameworks */,
+				BCA1C7B127C4F71800DBF732 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				BCA1C7AB27C4F71800DBF732 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				BC77B85C27BCE94C00449A42 /* StoreKit.framework in Frameworks */,
+				BCA1C7AD27C4F71800DBF732 /* FirebaseCrashlytics in Frameworks */,
+				BCA1C7A927C4F71800DBF732 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				BCA1C7B327C4F71800DBF732 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				BCA1C7A727C4F71800DBF732 /* FirebaseAnalytics in Frameworks */,
+				BCA1C7AF27C4F71800DBF732 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +159,7 @@
 				BCED3223279E0281003DC98B /* View */,
 				BCED3222279E027D003DC98B /* Model */,
 				BCED3217279E0275003DC98B /* Assets.xcassets */,
+				BCA1C7A327C4F56700DBF732 /* GoogleService-Info.plist */,
 				BCED321C279E0275003DC98B /* Info.plist */,
 				BCED3214279E0274003DC98B /* NFT_Create.xcdatamodeld */,
 			);
@@ -246,12 +263,22 @@
 				BCED3205279E0274003DC98B /* Frameworks */,
 				BCED3206279E0274003DC98B /* Resources */,
 				A6798922C944C222F24D81F5 /* [CP] Embed Pods Frameworks */,
+				BCA1C7B527C50DC500DBF732 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "NFT Create";
+			packageProductDependencies = (
+				BCA1C7A627C4F71800DBF732 /* FirebaseAnalytics */,
+				BCA1C7A827C4F71800DBF732 /* FirebaseAnalyticsSwift-Beta */,
+				BCA1C7AA27C4F71800DBF732 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				BCA1C7AC27C4F71800DBF732 /* FirebaseCrashlytics */,
+				BCA1C7AE27C4F71800DBF732 /* FirebaseFirestore */,
+				BCA1C7B027C4F71800DBF732 /* FirebaseFirestoreCombine-Community */,
+				BCA1C7B227C4F71800DBF732 /* FirebaseFirestoreSwift-Beta */,
+			);
 			productName = "NFT Create";
 			productReference = BCED3208279E0274003DC98B /* NFT Create.app */;
 			productType = "com.apple.product-type.application";
@@ -280,6 +307,9 @@
 				Base,
 			);
 			mainGroup = BCED31FF279E0274003DC98B;
+			packageReferences = (
+				BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = BCED3209279E0274003DC98B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -295,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44C3B1927A4232900BDEE8F /* Poppins-Medium.ttf in Resources */,
+				BCA1C7A427C4F56700DBF732 /* GoogleService-Info.plist in Resources */,
 				F44C3B1A27A4232900BDEE8F /* Poppins-Regular.ttf in Resources */,
 				BC65C4F227A42A0F00A859EB /* Poppins-Bold.ttf in Resources */,
 				F44C3B1B27A4232900BDEE8F /* Poppins-SemiBold.ttf in Resources */,
@@ -345,6 +376,25 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BCA1C7B527C50DC500DBF732 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -526,11 +576,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NFT Creator & Art Maker app wants to access your camera. Visual projects will be registered.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -542,7 +593,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enessari.nftcreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -560,11 +611,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = T6HN7DT422;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NFT Create/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NFT Creator & Art Maker app wants to access your camera. Visual projects will be registered.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -576,7 +627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enessari.nftcreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -608,6 +659,55 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BCA1C7A627C4F71800DBF732 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		BCA1C7A827C4F71800DBF732 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		BCA1C7AA27C4F71800DBF732 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		BCA1C7AC27C4F71800DBF732 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		BCA1C7AE27C4F71800DBF732 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BCA1C7B027C4F71800DBF732 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		BCA1C7B227C4F71800DBF732 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA1C7A527C4F71800DBF732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BCED3214279E0274003DC98B /* NFT_Create.xcdatamodeld */ = {

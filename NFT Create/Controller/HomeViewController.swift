@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         }
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         
     }
@@ -47,7 +48,6 @@ class HomeViewController: UIViewController {
     @IBAction func paymentButtonPressed(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "PaymentScreenViewController") as! PaymentScreenViewController
-        
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
     @IBAction func createButtonPressed(_ sender: UIButton) {

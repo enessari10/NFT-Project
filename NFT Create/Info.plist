@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>NFT Creator &amp; Art Maker app wants to access your camera. Visual projects will be registered.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Semibold.ttf</string>
